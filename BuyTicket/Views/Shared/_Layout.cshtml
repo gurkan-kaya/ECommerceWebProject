@@ -1,0 +1,134 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - BuyTicket</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark border-bottom box-shadow mb-3" style="background: linear-gradient(45deg, #C0C0C0, gray); ">
+            <div class="container">
+                <a class="navbar-brand" asp-controller="Home" asp-action="Index">
+                    <img src="~/images/Logo.png">
+                </a>
+
+
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div>
+                    <input type="search" class="form-control rounded " placeholder="Film Ara" aria-label="Search"
+                           aria-describedby="search-addon" />
+                </div>
+                <button type="button" class="btn btn-light" style="margin-left:3px;">ARA</button>
+                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+
+                    <ul class="navbar-nav flex-grow-1 flex-sm-row-reverse">
+
+                        <li class="nav-item rounded" style=" margin-left: 20px; ">
+                            <a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="Index">
+                                Üye Ol
+                                <img src="~/images/sign-up.png" style="width: 30px; height: 30px; display: inline-block;" />
+                            </a>
+                        </li>
+                        <li class="nav-item rounded" style="margin-left: 20px; ">
+                            <a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="Privacy">
+                                Giriş Yap
+                                <img src="~/images/login.png" style="width: 30px; height: 30px; display: inline-block;" />
+                            </a>
+                        </li>
+                        <li class="nav-item rounded" style="margin-left: 20px; ">
+                            <a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="Privacy">
+                                Sepet
+                                <img src="~/images/shopping-cart.png" style="width: 30px; height: 30px; display: inline-block;" />
+                            </a>
+
+                        </li>
+                    </ul>
+
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    @* <footer class="border-top footer text-muted " style="background: linear-gradient(45deg, blue, red); ">
+            <div class="container ">
+
+                <a class="text-light float-right" style="margin:15px;" asp-area="" asp-controller="Home" asp-action="Hakkimizda">Hakkımızda</a>
+                <a class="text-light float-right" style="margin:15px;" asp-area="" asp-controller="Home" asp-action="Iletisim">İletişim</a>
+                <a class="text-light float-right" style="margin:15px;" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            </div>
+            <div class="text-light align-items-md-center"> <h5>&copy; 2021 - BuyBook</h5>  </div>
+        </footer>*@
+
+    <footer class="footer  font-small pt-4 " style="background: linear-gradient(45deg, gray, #C0C0C0);">
+        <div class="container-fluid text-center text-md-left text-light" style="white-space: normal;">
+            <div class="row">
+                <div class="col-md-5 mt-md-0 mt-3">
+                    <h5 class="text-uppercase font-weight-bold">BİZİ TAKİP EDİN</h5>
+                    <p>INSTA LOGO</p>
+                    <p>FACEBOOK LOGO</p>
+                    <p>YOUTUBE LOGO</p>
+                </div>
+
+                <div class="col-md-4 mb-md-0 mb-3 ">
+
+                    <h5 class="font-weight-bold ">KATEGORİLER</h5>
+
+                    <ul class="list-unstyled ">
+                        <li>
+                            <a class="text-light" href="#!">Komedi Filmleri</a>
+                        </li>
+                        <li>
+                            <a class="text-light" href="#!">Dram Filmleri</a>
+                        </li>
+                        <li>
+                            <a class="text-light" href="#!">Aksiyon Filmleri</a>
+                        </li>
+                    </ul>
+
+                </div>
+
+                <div class="col-md-3 mb-md-0 mb-3">
+
+                    <h5 class=" font-weight-bold">ÖNEMLİ BİLGİLER</h5>
+
+                    <ul class="list-unstyled">
+                        <li>
+                            <a class="text-light" href="#!">Hakkımızda</a>
+                        </li>
+                        <li>
+                            <a class="text-light" href="#!">İletişim</a>
+                        </li>
+                        <li>
+                            <a class="text-light" href="#!">Sık Sorulan Sorular</a>
+                        </li>
+                    </ul>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="footer-copyright text-center py-3">
+            <h5 class="text-light">&copy; 2021 - BuyTicket</h5>
+        </div>
+
+    </footer>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>
