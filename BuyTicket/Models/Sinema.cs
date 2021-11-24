@@ -11,5 +11,7 @@ namespace BuyTicket.Models
         public string SinemaFotografi { get; set; }
         public string SinemaAdi { get; set; }
         public string SinemaHakkinda { get; set; }
+
+        public ICollection<Film> Filmler { get; set; }
     }
 }

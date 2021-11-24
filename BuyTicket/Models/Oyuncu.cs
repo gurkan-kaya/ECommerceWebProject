@@ -11,5 +11,7 @@ namespace BuyTicket.Models
         public string OyuncuFotografi { get; set; }
         public string OyuncuAdSoyad { get; set; }
         public string OyuncuHakkinda { get; set; }
+
+        public ICollection<FilmOyuncu> FilmlerOyuncular { get; set; }
     }
 }

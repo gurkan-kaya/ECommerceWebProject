@@ -1,6 +1,7 @@
 ﻿using BuyTicket.Data;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -17,7 +18,15 @@ namespace BuyTicket.Models
         public FilmKategorisi FilmKategorisi { get; set; }
         public string FilmUcreti { get; set; }
 
+        public ICollection<FilmOyuncu> FilmlerOyuncular { get; set; }
 
+        public int SinemaId { get; set; }
+        [ForeignKey("SinemaId")]
+        public Sinema Sinema { get; set; }
+
+        public int YonetmenId { get; set; }
+        [ForeignKey("YonetmenId")]
+        public Yonetmen Yonetmen { get; set; }
     }
     
 }
