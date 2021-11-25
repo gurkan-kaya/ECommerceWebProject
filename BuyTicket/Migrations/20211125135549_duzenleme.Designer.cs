@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BuyTicket.Migrations
 {
     [DbContext(typeof(BiletDbContext))]
-    [Migration("20211124182542_ilkMigration")]
-    partial class ilkMigration
+    [Migration("20211125135549_duzenleme")]
+    partial class duzenleme
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -31,10 +31,13 @@ namespace BuyTicket.Migrations
                     b.Property<string>("FilmAdi")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("FilmBaslamaSaati")
+                    b.Property<DateTime>("FilmBaslamaSaati1")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime>("FilmBitisSaati")
+                    b.Property<DateTime>("FilmBaslamaSaati2")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("FilmBaslamaSaati3")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("FilmFotografi")
@@ -46,8 +49,8 @@ namespace BuyTicket.Migrations
                     b.Property<int>("FilmKategorisi")
                         .HasColumnType("int");
 
-                    b.Property<string>("FilmUcreti")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<float>("FilmUcreti")
+                        .HasColumnType("real");
 
                     b.Property<int>("SinemaId")
                         .HasColumnType("int");

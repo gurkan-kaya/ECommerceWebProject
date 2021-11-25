@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace BuyTicket.Migrations
 {
-    public partial class ilkMigration : Migration
+    public partial class duzenleme : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -60,11 +60,12 @@ namespace BuyTicket.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     FilmAdi = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     FilmHakkinda = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    FilmBaslamaSaati = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    FilmBitisSaati = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    FilmBaslamaSaati1 = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    FilmBaslamaSaati2 = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    FilmBaslamaSaati3 = table.Column<DateTime>(type: "datetime2", nullable: false),
                     FilmFotografi = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     FilmKategorisi = table.Column<int>(type: "int", nullable: false),
-                    FilmUcreti = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    FilmUcreti = table.Column<float>(type: "real", nullable: false),
                     SinemaId = table.Column<int>(type: "int", nullable: false),
                     YonetmenId = table.Column<int>(type: "int", nullable: false)
                 },

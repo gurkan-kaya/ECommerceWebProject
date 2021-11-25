@@ -56,6 +56,8 @@ namespace BuyTicket
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
             });
+
+           BiletDbInitializer.EklenecekVeriler(app);
         }
     }
 }
