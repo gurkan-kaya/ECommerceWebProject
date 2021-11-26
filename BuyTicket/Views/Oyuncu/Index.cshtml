@@ -1,0 +1,51 @@
+﻿@model IEnumerable<BuyTicket.Models.Oyuncu>
+
+@{
+    ViewData["Title"] = "Oyuncular";
+}
+
+
+    <h1>OYUNCULAR</h1>
+
+    <p>
+        <a asp-action="Create" class="btn btn-outline-dark">Yeni Oyuncu Ekle</a>
+    </p>
+    <table class="table">
+        <thead>
+            <tr class="text-center">
+                <th>
+                    @Html.DisplayNameFor(model => model.OyuncuFotografi)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.OyuncuAdSoyad)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.OyuncuHakkinda)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+             {
+                <tr class="text-center">
+                    <td>
+                        <img src="@item.OyuncuFotografi" asp-append-version="true" style="width:200px; height:200px;">
+                    </td>
+                    <td class="font-weight-bold">
+                        @Html.DisplayFor(modelItem => item.OyuncuAdSoyad)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.OyuncuHakkinda)
+                    </td>
+                    <td >
+                        <a  asp-action="Edit" asp-route-id="@item.OyuncuId" class="btn btn-secondary btn-block">Düzenle</a>
+                        <br />
+                        <a  asp-action="Details" asp-route-id="@item.OyuncuId" class="btn btn-info btn-block">Detaylar</a>
+                        <br />
+                        <a  asp-action="Delete" asp-route-id="@item.OyuncuId" class="btn btn-dark btn-block">Sil</a>
+                    </td>
+                </tr>
+             }
+        </tbody>
+    </table>

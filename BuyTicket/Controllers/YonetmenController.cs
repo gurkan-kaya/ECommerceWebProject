@@ -18,7 +18,7 @@ namespace BuyTicket.Controllers
         public async Task<IActionResult> Index()
         {
             var yonetmenler = await _context.Yonetmenler.ToListAsync();
-            return View();
+            return View(yonetmenler);
         }
     }
 }

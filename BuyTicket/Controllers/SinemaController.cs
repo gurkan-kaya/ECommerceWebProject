@@ -18,7 +18,7 @@ namespace BuyTicket.Controllers
         public async Task<IActionResult> Index()
         {
             var sinemalar = await _context.Sinemalar.ToListAsync();
-            return View();
+            return View(sinemalar);
         }
     }
 }

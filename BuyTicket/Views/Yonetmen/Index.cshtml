@@ -1,0 +1,49 @@
+﻿@model IEnumerable<BuyTicket.Models.Yonetmen>
+
+@{
+    ViewData["Title"] = "Yönetmenler";
+}
+
+<h1>YÖNETMENLER</h1>
+
+<p>
+    <a asp-action="Create" class="btn btn-outline-dark">Yeni Yönetmen Ekle</a>
+</p>
+<table class="table">
+    <thead>
+        <tr class="text-center font-weight-bolder">
+            <th>
+                @Html.DisplayNameFor(model => model.YonetmenFotografi)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.YonetmenAdSoyad)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.YonetmenHakkinda)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr class="text-center">
+            <td>
+                <img src="@item.YonetmenFotografi" asp-append-version="true" style="width:200px; height:200px;">
+            </td>
+            <td class="font-weight-bold">
+                @Html.DisplayFor(modelItem => item.YonetmenAdSoyad)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.YonetmenHakkinda)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.YonetmenId" class="btn btn-secondary btn-block">Düzenle</a>
+                <br />
+                <a asp-action="Details" asp-route-id="@item.YonetmenId" class="btn btn-info btn-block">Detaylar</a>
+                <br />
+                <a asp-action="Delete" asp-route-id="@item.YonetmenId" class="btn btn-dark btn-block">Sil</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

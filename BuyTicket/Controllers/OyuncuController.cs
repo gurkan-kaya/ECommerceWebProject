@@ -19,7 +19,7 @@ namespace BuyTicket.Controllers
         public async Task<IActionResult> Index()
         {
             var oyuncular = await _context.Oyuncular.ToListAsync();
-            return View();
+            return View(oyuncular);
         }
     }
 }
