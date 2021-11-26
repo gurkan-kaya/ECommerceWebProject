@@ -3,89 +3,149 @@
 @{
     ViewData["Title"] = "Filmler";
 }
+    <div class="row">
+        @foreach (var item in Model)
+         {
+            <div class="col-md-6 col-xs-12 mb-3" style="display: flex; flex-direction: row; align-items: stretch;">
+                <div class="card mb-3" >
+                    <div class="row ">
+                        <div class="col-md-12">
+                            <div class="card-header text-white bg-dark">
+                                <p class="card-text">
+                                    <h3 class="card-title">
+                                        @item.FilmAdi
+                                        <a class="text-white float-right" style="font-size:x-large">Edit</a>
+                                    </h3>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card-body">
+                                <p class="card-text">@item.FilmHakkinda.Substring(0, item.FilmHakkinda.Substring(0, 100).LastIndexOf(" ")) ...</p>
+                                <p class="card-text"><b>Sinema: </b>@item.Sinema.SinemaAdi</p>
+                                <p class="card-text"><b>Kategori: </b>@item.FilmKategorisi</p>
+                                <b>Seans Seçiniz: </b>
+                                <select name="saat" id="saat" style="height: 44px;  border: none;  overflow: hidden; ">
+                                    <option class="btn btn-outline-info mb-1 card-text" value="bir">@item.FilmBaslamaSaati1</option>
+                                    <option class="btn btn-outline-info mb-1 card-text" value="iki">@item.FilmBaslamaSaati2</option>
+                                    <option class="btn btn-outline-info card-text" value="uc">@item.FilmBaslamaSaati3</option>
+                                </select>
 
-<h1>FİLMLER</h1>
+                            </div>
+                        </div>
+                        <div class="col-md-8">
+                            <img src="@item.FilmFotografi" asp-append-version="true" style="width:100%; height:100%">
+                        </div>
+                        <div class="col-md-12">
+                            <div class="card-footer ">
+                                <p class="card-text">
+                                    <a class="btn btn-outline-secondary float-right">
+                                        Daha Fazla
+                                    </a>
+                                    <a class="btn btn-dark text-white">
+                                        Sepete Ekle  @item.FilmUcreti TL
+                                    </a>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+         }
+    </div>
 
-<p>
-    <a asp-action="Create" class="btn btn-outline-dark">Yeni Film Ekle</a>
-</p>
-<table class="table">
-    <thead>
-        <tr class="text-center">
-            <th>
-                @Html.DisplayNameFor(model => model.FilmAdi)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.FilmHakkinda)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.FilmBaslamaSaati1)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.FilmBaslamaSaati2)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.FilmBaslamaSaati3)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.FilmFotografi)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.FilmKategorisi)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.FilmUcreti)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Sinema)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Yonetmen)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr class="text-center">
-            <td  class="font-weight-bold">
-                @Html.DisplayFor(modelItem => item.FilmAdi)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FilmHakkinda)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FilmBaslamaSaati1)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FilmBaslamaSaati2)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FilmBaslamaSaati3)
-            </td>
-            <td>
-                <img src="@item.FilmFotografi" asp-append-version="true" style="width:200px; height:200px;">
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FilmKategorisi)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FilmUcreti)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Sinema.SinemaId)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Yonetmen.YonetmenId)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.FilmId" class="btn btn-secondary btn-block">Düzenle</a>
-                <br />
-                <a asp-action="Details" asp-route-id="@item.FilmId" class="btn btn-info btn-block">Detaylar</a>
-                <br />
-                <a asp-action="Delete" asp-route-id="@item.FilmId" class="btn btn-dark btn-block">Sil</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+
+
+
+
+
+
+
+
+
+
+@*<h1>FİLMLER</h1>
+
+    <p>
+        <a asp-action="Create" class="btn btn-outline-dark">Yeni Film Ekle</a>
+    </p>
+    <table class="table">
+        <thead>
+            <tr class="text-center">
+                <th>
+                    @Html.DisplayNameFor(model => model.FilmAdi)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.FilmHakkinda)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.FilmBaslamaSaati1)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.FilmBaslamaSaati2)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.FilmBaslamaSaati3)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.FilmFotografi)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.FilmKategorisi)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.FilmUcreti)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Sinema)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Yonetmen)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+    @foreach (var item in Model) {
+            <tr class="text-center">
+                <td  class="font-weight-bold">
+                    @Html.DisplayFor(modelItem => item.FilmAdi)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FilmHakkinda)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FilmBaslamaSaati1)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FilmBaslamaSaati2)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FilmBaslamaSaati3)
+                </td>
+                <td>
+                    <img src="@item.FilmFotografi" asp-append-version="true" style="width:200px; height:200px;">
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FilmKategorisi)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FilmUcreti)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Sinema.SinemaId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Yonetmen.YonetmenId)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.FilmId" class="btn btn-secondary btn-block">Düzenle</a>
+                    <br />
+                    <a asp-action="Details" asp-route-id="@item.FilmId" class="btn btn-info btn-block">Detaylar</a>
+                    <br />
+                    <a asp-action="Delete" asp-route-id="@item.FilmId" class="btn btn-dark btn-block">Sil</a>
+                </td>
+            </tr>
+    }
+        </tbody>
+    </table>*@

@@ -17,7 +17,7 @@ namespace BuyTicket.Controllers
         }
         public async Task<IActionResult> Index()
         {
-            var filmler = await _context.Filmler.ToListAsync();
+            var filmler = await _context.Filmler.Include(a=>a.Sinema).ToListAsync();
             return View(filmler);
         }
     }
