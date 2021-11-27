@@ -12,7 +12,7 @@
                         <div class="col-md-12">
                             <div class="card-header text-white bg-dark">
                                 <p class="card-text">
-                                    <h3 class="card-title">
+                                    <h3 class="card-title text-center">
                                         @item.FilmAdi
                                         <a class="text-white float-right" style="font-size:x-large">Edit</a>
                                     </h3>
@@ -21,29 +21,30 @@
                         </div>
                         <div class="col-md-4">
                             <div class="card-body">
-                                <p class="card-text">@item.FilmHakkinda.Substring(0, item.FilmHakkinda.Substring(0, 100).LastIndexOf(" ")) ...</p>
-                                <p class="card-text"><b>Sinema: </b>@item.Sinema.SinemaAdi</p>
-                                <p class="card-text"><b>Kategori: </b>@item.FilmKategorisi</p>
-                                <b>Seans Seçiniz: </b>
-                                <select name="saat" id="saat" style="height: 44px;  border: none;  overflow: hidden; ">
-                                    <option class="btn btn-outline-info mb-1 card-text" value="bir">@item.FilmBaslamaSaati1</option>
-                                    <option class="btn btn-outline-info mb-1 card-text" value="iki">@item.FilmBaslamaSaati2</option>
-                                    <option class="btn btn-outline-info card-text" value="uc">@item.FilmBaslamaSaati3</option>
-                                </select>
-
+                                <p class="card-text rounded" style="background-color: whitesmoke;">@item.FilmHakkinda.Substring(0, item.FilmHakkinda.Substring(0, 100).LastIndexOf(" ")) ...</p>
+                                <p class="card-text rounded" style="background-color:whitesmoke;"><b>Kategori: </b>@item.FilmKategorisi</p>
+                                <p class="card-text rounded" style="background-color: whitesmoke;"><b>Sinema: </b>@item.Sinema.SinemaAdi</p>
+                                <p class="card-text rounded" style="background-color:whitesmoke;">
+                                    <b>Seans Seçiniz: </b>
+                                    <select name="saat" id="saat" style="height: 44px; border: none; overflow: hidden; background-color: whitesmoke;">
+                                        <option class="btn btn-outline-info mb-1 card-text" value="bir">@item.FilmBaslamaSaati1</option>
+                                        <option class="btn btn-outline-info mb-1 card-text" value="iki">@item.FilmBaslamaSaati2</option>
+                                        <option class="btn btn-outline-info card-text" value="uc">@item.FilmBaslamaSaati3</option>
+                                    </select>
+                                </p>
                             </div>
                         </div>
                         <div class="col-md-8">
                             <img src="@item.FilmFotografi" asp-append-version="true" style="width:100%; height:100%">
                         </div>
                         <div class="col-md-12">
-                            <div class="card-footer ">
+                            <div class="card-footer">
                                 <p class="card-text">
-                                    <a class="btn btn-outline-secondary float-right">
+                                    <a class="btn btn-outline-secondary float-right" >
                                         Daha Fazla
                                     </a>
                                     <a class="btn btn-dark text-white">
-                                        Sepete Ekle  @item.FilmUcreti TL
+                                        Bilet Al  @item.FilmUcreti TL
                                     </a>
                                 </p>
                             </div>

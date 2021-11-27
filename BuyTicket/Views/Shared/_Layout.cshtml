@@ -11,25 +11,38 @@
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark border-bottom box-shadow mb-3" style="background: linear-gradient(45deg, #C0C0C0, gray); ">
             <div class="container">
-                <a class="navbar-brand" asp-controller="Home" asp-action="Index">
+                <a class="navbar-brand" asp-controller="Film" asp-action="Index">
                     <img src="~/images/Logo.png">
                 </a>
-
 
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <div>
+                <form class="form-inline" asp-controller="Film" asp-action="AramaSonucu">
                     <input type="search" class="form-control rounded " placeholder="Film Ara" aria-label="Search"
                            aria-describedby="search-addon" />
-                </div>
-                <button type="button" class="btn btn-light" style="margin-left:3px;">ARA</button>
+
+                    <button type="submit" class="btn btn-light" style="margin-left:3px;">ARA</button>
+                </form>
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
 
                     <ul class="navbar-nav flex-grow-1 flex-sm-row-reverse">
 
-                        <li class="nav-item rounded" style=" margin-left: 20px; ">
+
+                        <li class="nav-item dropdown">
+                            <button class="btn btn-outline-light dropdown-toggle nav-link text-dark" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Admin Menü
+                            </button>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                <a class="dropdown-item" asp-controller="Oyuncu" asp-action="Index">Oyucular</a>
+                                <a class="dropdown-item" asp-controller="Yonetmen" asp-action="Index">Yönetmenler</a>
+                                <a class="dropdown-item" asp-controller="Sinema" asp-action="Index">Sinemalar</a>
+                            </div>
+
+                        </li>
+
+                        <li class="nav-item rounded" style=" margin-left: 20px; margin-right:50px; ">
                             <a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="Index">
                                 Üye Ol
                                 <img src="~/images/sign-up.png" style="width: 30px; height: 30px; display: inline-block;" />
