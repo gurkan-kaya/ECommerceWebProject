@@ -1,0 +1,37 @@
+﻿@model BuyTicket.Models.Oyuncu
+
+@{
+    ViewData["Title"] = "Oyuncu Sil";
+}
+
+<h3>Seçtiğiniz Oyuncuyu Silmek İstediğinizden Emin Misiniz?</h3>
+<div>
+    <h4>Oyuncu</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.OyuncuFotografi)
+        </dt>
+        <dd class="col-sm-10">
+            <img src="@Model.OyuncuFotografi" asp-append-version="true" style="width:200px; height:200px;">
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.OyuncuAdSoyad)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.OyuncuAdSoyad)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.OyuncuHakkinda)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.OyuncuHakkinda)
+        </dd>
+    </dl>
+    
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="OyuncuId" />
+        <input type="submit" value="Delete" class="btn btn-danger" />
+        <a class="btn btn-secondary float-right" asp-action="Index">Back to List</a>
+    </form>
+</div>

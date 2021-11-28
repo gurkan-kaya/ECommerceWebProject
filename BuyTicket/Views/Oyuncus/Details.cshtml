@@ -1,0 +1,36 @@
+﻿@model BuyTicket.Models.Oyuncu
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>Oyuncu</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.OyuncuFotografi)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.OyuncuFotografi)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.OyuncuAdSoyad)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.OyuncuAdSoyad)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.OyuncuHakkinda)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.OyuncuHakkinda)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.OyuncuId">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

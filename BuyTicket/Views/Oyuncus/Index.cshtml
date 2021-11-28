@@ -1,0 +1,47 @@
+﻿@model IEnumerable<BuyTicket.Models.Oyuncu>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.OyuncuFotografi)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OyuncuAdSoyad)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OyuncuHakkinda)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.OyuncuFotografi)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OyuncuAdSoyad)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OyuncuHakkinda)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.OyuncuId">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.OyuncuId">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.OyuncuId">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

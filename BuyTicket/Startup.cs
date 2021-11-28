@@ -1,4 +1,6 @@
 using BuyTicket.Data;
+using BuyTicket.Data.Abstract;
+using BuyTicket.Repositories;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -26,6 +28,8 @@ namespace BuyTicket
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<BiletDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultSqlConnection")));
+
+            services.AddScoped<IOyuncuRepository, OyuncuRepository>();
 
             services.AddControllersWithViews();
         }

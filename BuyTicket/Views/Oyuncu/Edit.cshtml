@@ -1,0 +1,41 @@
+﻿@model BuyTicket.Models.Oyuncu
+
+@{
+    ViewData["Title"] = "Oyuncu Bilgilerini Düzenle";
+}
+
+<h1>Oyuncu Bilgilerini Düzenle</h1>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post" enctype="multipart/form-data" asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="OyuncuId" />
+            <div class="form-group">
+                @*<label asp-for="OyuncuFotografi" class="control-label"></label>*@
+                <label asp-for="OyuncuFotografi" class="control-label">Yeni Fotoğraf</label>
+                <input asp-for="OyuncuFotografi" type="file" name="file" class="form-control mb-2" />
+                <input style="display:none;" asp-for="OyuncuFotografi" class="form-control mb-2" />
+                <span asp-validation-for="OyuncuFotografi" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="OyuncuAdSoyad" class="control-label"></label>
+                <input asp-for="OyuncuAdSoyad" class="form-control" />
+                <span asp-validation-for="OyuncuAdSoyad" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="OyuncuHakkinda" class="control-label"></label>
+                <textarea asp-for="OyuncuHakkinda" rows="5" class="form-control"> </textarea>
+                <span asp-validation-for="OyuncuHakkinda" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+                <a class="btn btn-secondary float-right" asp-action="Index">Geri Dön</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+
