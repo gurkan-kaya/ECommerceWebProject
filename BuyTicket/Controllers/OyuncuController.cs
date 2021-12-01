@@ -1,5 +1,5 @@
 ﻿using BuyTicket.Data;
-using BuyTicket.Data.Abstract;
+using BuyTicket.Data.Repositories.Abstract;
 using BuyTicket.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -116,7 +116,7 @@ namespace BuyTicket.Controllers
         }
 
 
-        // GET: Oyuncus/Delete/5
+        
         public IActionResult Delete(int id)
         {
 
@@ -129,7 +129,6 @@ namespace BuyTicket.Controllers
             return View(oyuncu);
         }
 
-        // POST: Oyuncus/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public  IActionResult DeleteConfirmed(int id)

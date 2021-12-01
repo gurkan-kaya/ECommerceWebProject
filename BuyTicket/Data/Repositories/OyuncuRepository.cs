@@ -1,5 +1,5 @@
 ﻿using BuyTicket.Data;
-using BuyTicket.Data.Abstract;
+using BuyTicket.Data.Repositories.Abstract;
 using BuyTicket.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace BuyTicket.Repositories
+namespace BuyTicket.Data.Repositories
 {
     public class OyuncuRepository : IOyuncuRepository
     {
