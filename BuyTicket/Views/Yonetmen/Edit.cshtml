@@ -1,0 +1,40 @@
+﻿@model BuyTicket.Models.Yonetmen
+
+@{
+    ViewData["Title"] = "Yönetmen Bilgilerini Düzenle";
+}
+
+<h1>Yönetmen Bilgilerini Düzenle</h1>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post" enctype="multipart/form-data" asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="YonetmenId" />
+            <div class="form-group">
+                <label asp-for="YonetmenFotografi" class="control-label">Yeni Fotoğraf</label>
+                <input asp-for="YonetmenFotografi" type="file" name="file" class="form-control mb-2" />
+                <input style="display:none;" asp-for="YonetmenFotografi" class="form-control mb-2" />
+                <span asp-validation-for="YonetmenFotografi" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="YonetmenAdSoyad" class="control-label"></label>
+                <input asp-for="YonetmenAdSoyad" class="form-control" />
+                <span asp-validation-for="YonetmenAdSoyad" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="YonetmenHakkinda" class="control-label"></label>
+                <textarea asp-for="YonetmenHakkinda" rows="5" class="form-control"> </textarea>
+                <span asp-validation-for="YonetmenHakkinda" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+                <a class="btn btn-secondary float-right" asp-action="Index">Geri Dön</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+
