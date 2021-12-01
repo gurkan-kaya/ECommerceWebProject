@@ -1,0 +1,36 @@
+﻿@model BuyTicket.Models.Yonetmen
+
+@{
+    ViewData["Title"] = "Yönetmen Sil";
+}
+
+<h3>Seçtiğiniz Yönetmeni Silmek İstediğinizden Emin Misiniz?</h3>
+<div>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.YonetmenFotografi)
+        </dt>
+        <dd class="col-sm-10">
+            <img src="@Model.YonetmenFotografi" asp-append-version="true" style="width:200px; height:200px;">
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.YonetmenAdSoyad)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.YonetmenAdSoyad)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.YonetmenHakkinda)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.YonetmenHakkinda)
+        </dd>
+    </dl>
+    
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="YonetmenId" />
+        <input type="submit" value="Sil" class="btn btn-danger" />
+        <a class="btn btn-secondary float-right" asp-action="Index">Geri Dön</a>
+    </form>
+</div>

@@ -6,13 +6,12 @@ using System.Threading.Tasks;
 
 namespace BuyTicket.Data.Repositories.Abstract
 {
-    public interface IOyuncuRepository
+    public interface IYonetmenRepository
     {
-        Oyuncu GetById(int id);
-        void Add(Oyuncu oyuncu);
+        Yonetmen GetById(int id);
+        void Add(Yonetmen yonetmen);
         void Delete(int id);
-        Oyuncu Update(int id,Oyuncu oyuncuSon);
-        Task<IEnumerable<Oyuncu>> ListAll();
-
+        Yonetmen Update(int id, Yonetmen yonetmenSon);
+        Task<IEnumerable<Yonetmen>> ListAll();
     }
 }
