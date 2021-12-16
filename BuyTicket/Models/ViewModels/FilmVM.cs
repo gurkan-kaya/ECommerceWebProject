@@ -8,8 +8,10 @@ using System.Threading.Tasks;
 
 namespace BuyTicket.Models
 {
-    public class Film
+    public class FilmVM
     {
+        //Film mıodelinin create işlemi için bir viewmodel oluşturuldu
+
         public int FilmId { get; set; }
 
         [Display(Name = "Film Adı")]
@@ -33,18 +35,16 @@ namespace BuyTicket.Models
         [Display(Name = "Film Ücreti")]
         public float FilmUcreti { get; set; }
 
+
         [Display(Name = "Film Oyuncuları")]
-        public ICollection<FilmOyuncu> FilmlerOyuncular { get; set; }
+        /*Film modelimizde alttaki collection FilmOyuncu tipinde idi. Ancak many to many ilişkide ara tabloyla ilgili işlemleri yapabilmek için
+         * bu listenin tipini int olarak değiştirdim ve View'de dseçilen ıyunvuların ID'lerinin tutulmasını sağladım.
+         */
+        public ICollection<int> OyuncuListesi { get; set; }
 
         public int SinemaId { get; set; }
-        [ForeignKey("SinemaId")]
-        public Sinema Sinema { get; set; }
-
         public int YonetmenId { get; set; }
 
-        [Display(Name = "Yönetmen")]
-        [ForeignKey("YonetmenId")]
-        public Yonetmen Yonetmen { get; set; }
     }
     
 }

@@ -30,7 +30,10 @@ namespace BuyTicket
             services.AddDbContext<BiletDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultSqlConnection")));
 
             services.AddScoped<IOyuncuRepository, OyuncuRepository>();
+            services.AddScoped<ISinemaRepository, SinemaRepository>();
             services.AddScoped<IYonetmenRepository, YonetmenRepository>();
+            services.AddScoped<IFilmRepository, FilmRepository>();
+
 
             services.AddControllersWithViews();
         }
