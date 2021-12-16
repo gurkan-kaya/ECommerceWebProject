@@ -18,7 +18,7 @@
                                 <h3 class="card-title text-center">
                                     <a class=" btn btn-outline-secondary text-white float-left" style="font-size:large" asp-action="Edit" asp-route-id="@item.FilmId">Düzenle</a>
                                     @item.FilmAdi
-                                    <a class="btn btn-outline-secondary text-white float-right" style="font-size:large">Sil</a>
+                                    <a class="btn btn-outline-secondary text-white float-right" style="font-size:large"  asp-action="Delete" asp-route-id="@item.FilmId">Sil</a>
                                 </h3>
                             </p>
                         </div>

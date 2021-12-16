@@ -110,7 +110,7 @@ namespace BuyTicket.Controllers
             ViewData["SinemaId"] = new SelectList(filmVerileri.Sinemalar, "SinemaId", "SinemaAdi");
             ViewData["OyuncuId"] = new SelectList(filmVerileri.Oyuncular, "OyuncuId", "OyuncuAdSoyad");
             ViewData["YonetmenId"] = new SelectList(filmVerileri.Yonetmenler, "YonetmenId", "YonetmenAdSoyad");
-            return View();
+            return View(filmSon);
         }
 
 
@@ -138,7 +138,7 @@ namespace BuyTicket.Controllers
             if (ModelState.IsValid)
             {
 
-              //  await _repo.FilmGuncelle()
+                await _repo.FilmGuncelle(film);
 
                 return RedirectToAction(nameof(Index));
             }
@@ -146,6 +146,39 @@ namespace BuyTicket.Controllers
             return View(film);
         }
 
+        public IActionResult Delete(int id)
+        {
+            var film = _repo.FilmGetir(id);
+            if (film == null)
+            {
+                return NotFound();
+            }
+
+            return View(film);
+
+        }
+
+        // POST: Films/Delete/5
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public IActionResult DeleteConfirmed(int id)
+        {
+            var film = _repo.GetById(id);
+            _repo.Delete(id); //id'ye göre bulunan filmi, filmrepository'deki delete metodunun içindeki remove'a vererek silme işlemi gerçekleştirir. 
+            return RedirectToAction(nameof(Index));
+
+        }
+
+        public async Task<IActionResult> AramaSonucu(string arananFilm)
+        {
+            var filmler = await  _repo.ListAll(m => m.Sinema);
+            if (string.IsNullOrEmpty(arananFilm) == true) 
+                return View("Index", filmler);
+
+
+             var sonuc = filmler.Where(m => m.FilmAdi.Contains(arananFilm)).ToList();
+            return View("Index", sonuc);
+        }
 
     }
 
