@@ -47,7 +47,7 @@
                                 <a class="btn btn-outline-secondary float-right" asp-action="Details" asp-route-id="@item.FilmId">
                                     Daha Fazla
                                 </a>
-                                <a class="btn btn-dark text-white">
+                                <a asp-controller="Siparis" asp-action="SepeteEkleArtir" asp-route-id="@item.FilmId" class="btn btn-dark text-white">
                                     Bilet Al  @item.FilmUcreti TL
                                 </a>
                             </p>

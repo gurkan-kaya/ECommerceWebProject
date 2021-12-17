@@ -1,0 +1,58 @@
+﻿@model BuyTicket.Models.ViewModels.SepetVM
+
+@{
+    ViewData["Title"] = "Sepet";
+}
+
+<h3>Sepetim</h3>
+
+<div class="row">
+    <div class="col-md-8 offset-2">
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Adet</th>
+                    <th>Film</th>
+                    <th>Fiyat</th>
+                    <th>Toplam</th>
+                    <th></th>                    
+                </tr>
+            </thead>
+            <tbody>
+
+            @foreach (var item in Model.SepetRepo.Sepettekiler)
+            {
+                <tr>
+                    <td class="align-middle">@item.Adet</td>
+                    <td class="align-middle">@item.Film.FilmAdi</td>
+                    <td class="align-middle">@item.Film.FilmUcreti.ToString("c")</td>
+                    <td class="align-middle">@((item.Adet*item.Film.FilmUcreti).ToString("c"))</td>
+                    <td class="align-middle">
+                        <a class="text-center" asp-controller="Siparis" asp-action="SepettenCikarAzalt" asp-route-id="@item.Film.FilmId">-</a>
+                        <a class="text-center" asp-controller="Siparis" asp-action="SepeteEkleArtir" asp-route-id="@item.Film.FilmId">+</a>
+                    </td>
+                </tr>
+            }
+            </tbody>
+
+            <tfoot>
+                <tr>
+                    
+                    <td colspan="2"></td>
+                    <td><b>Toplam Ödenecek Tutar:</b></td>
+                    <td>
+                        @Model.ToplamTutar.ToString("c")
+                    </td>
+                    <td></td>
+
+                </tr>
+            </tfoot>
+        </table>
+
+        <div class="text-center">
+            <a class="btn btn-outline-secondary" asp-controller="Film" asp-action="Index">Ana Sayfaya Dön</a>
+        </div>
+
+    </div>
+</div>

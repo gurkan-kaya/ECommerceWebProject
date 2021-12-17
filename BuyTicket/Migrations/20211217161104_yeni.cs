@@ -1,9 +1,8 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore.Migrations;
+﻿using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace BuyTicket.Migrations
 {
-    public partial class duzenleme : Migration
+    public partial class yeni : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -14,8 +13,8 @@ namespace BuyTicket.Migrations
                     OyuncuId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     OyuncuFotografi = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    OyuncuAdSoyad = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    OyuncuHakkinda = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    OyuncuAdSoyad = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false),
+                    OyuncuHakkinda = table.Column<string>(type: "nvarchar(1000)", maxLength: 1000, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -29,12 +28,26 @@ namespace BuyTicket.Migrations
                     SinemaId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     SinemaFotografi = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    SinemaAdi = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    SinemaHakkinda = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    SinemaAdi = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    SinemaHakkinda = table.Column<string>(type: "nvarchar(1000)", maxLength: 1000, nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Sinemalar", x => x.SinemaId);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Siparisler",
+                columns: table => new
+                {
+                    SiparisId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    KullaniciEmail = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    KullaniciId = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Siparisler", x => x.SiparisId);
                 });
 
             migrationBuilder.CreateTable(
@@ -44,8 +57,8 @@ namespace BuyTicket.Migrations
                     YonetmenId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     YonetmenFotografi = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    YonetmenAdSoyad = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    YonetmenHakkinda = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    YonetmenAdSoyad = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false),
+                    YonetmenHakkinda = table.Column<string>(type: "nvarchar(1000)", maxLength: 1000, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -59,10 +72,10 @@ namespace BuyTicket.Migrations
                     FilmId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     FilmAdi = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    FilmHakkinda = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    FilmBaslamaSaati1 = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    FilmBaslamaSaati2 = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    FilmBaslamaSaati3 = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    FilmHakkinda = table.Column<string>(type: "nvarchar(max)", maxLength: 10000, nullable: true),
+                    FilmBaslamaSaati1 = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    FilmBaslamaSaati2 = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    FilmBaslamaSaati3 = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     FilmFotografi = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     FilmKategorisi = table.Column<int>(type: "int", nullable: false),
                     FilmUcreti = table.Column<float>(type: "real", nullable: false),
@@ -110,6 +123,34 @@ namespace BuyTicket.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "SiparisFilmler",
+                columns: table => new
+                {
+                    SiparisFilmId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Fiyat = table.Column<int>(type: "int", nullable: false),
+                    Adet = table.Column<int>(type: "int", nullable: false),
+                    FilmId = table.Column<int>(type: "int", nullable: false),
+                    SiparisId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_SiparisFilmler", x => x.SiparisFilmId);
+                    table.ForeignKey(
+                        name: "FK_SiparisFilmler_Filmler_FilmId",
+                        column: x => x.FilmId,
+                        principalTable: "Filmler",
+                        principalColumn: "FilmId",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_SiparisFilmler_Siparisler_SiparisId",
+                        column: x => x.SiparisId,
+                        principalTable: "Siparisler",
+                        principalColumn: "SiparisId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_Filmler_SinemaId",
                 table: "Filmler",
@@ -124,6 +165,16 @@ namespace BuyTicket.Migrations
                 name: "IX_FilmlerOyuncular_FilmId",
                 table: "FilmlerOyuncular",
                 column: "FilmId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_SiparisFilmler_FilmId",
+                table: "SiparisFilmler",
+                column: "FilmId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_SiparisFilmler_SiparisId",
+                table: "SiparisFilmler",
+                column: "SiparisId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -132,10 +183,16 @@ namespace BuyTicket.Migrations
                 name: "FilmlerOyuncular");
 
             migrationBuilder.DropTable(
-                name: "Filmler");
+                name: "SiparisFilmler");
 
             migrationBuilder.DropTable(
                 name: "Oyuncular");
+
+            migrationBuilder.DropTable(
+                name: "Filmler");
+
+            migrationBuilder.DropTable(
+                name: "Siparisler");
 
             migrationBuilder.DropTable(
                 name: "Sinemalar");

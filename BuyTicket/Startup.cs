@@ -3,6 +3,7 @@ using BuyTicket.Data.Repositories;
 using BuyTicket.Data.Repositories.Abstract;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -33,7 +34,13 @@ namespace BuyTicket
             services.AddScoped<ISinemaRepository, SinemaRepository>();
             services.AddScoped<IYonetmenRepository, YonetmenRepository>();
             services.AddScoped<IFilmRepository, FilmRepository>();
+            
 
+            //Alýþveriþ sepeti için konfigürasonlar 
+            //singleton servisler sadece ilk requestte oluþturulurlar.
+            services.AddSingleton<IHttpContextAccessor,HttpContextAccessor>();   
+            services.AddScoped(sr => SepetRepository.AlisVerisSepetiniGetir(sr));
+            services.AddSession();
 
             services.AddControllersWithViews();
         }
@@ -55,7 +62,7 @@ namespace BuyTicket
             app.UseStaticFiles();
 
             app.UseRouting();
-
+            app.UseSession();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>

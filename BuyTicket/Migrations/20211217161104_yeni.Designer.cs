@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BuyTicket.Migrations
 {
     [DbContext(typeof(BiletDbContext))]
-    [Migration("20211126211001_yeni")]
+    [Migration("20211217161104_yeni")]
     partial class yeni
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -43,6 +43,7 @@ namespace BuyTicket.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("FilmHakkinda")
+                        .HasMaxLength(10000)
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("FilmKategorisi")
@@ -89,13 +90,17 @@ namespace BuyTicket.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("OyuncuAdSoyad")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasMaxLength(30)
+                        .HasColumnType("nvarchar(30)");
 
                     b.Property<string>("OyuncuFotografi")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("OyuncuHakkinda")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasMaxLength(1000)
+                        .HasColumnType("nvarchar(1000)");
 
                     b.HasKey("OyuncuId");
 
@@ -110,17 +115,66 @@ namespace BuyTicket.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("SinemaAdi")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("SinemaFotografi")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("SinemaHakkinda")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasMaxLength(1000)
+                        .HasColumnType("nvarchar(1000)");
 
                     b.HasKey("SinemaId");
 
                     b.ToTable("Sinemalar");
+                });
+
+            modelBuilder.Entity("BuyTicket.Models.Siparis", b =>
+                {
+                    b.Property<int>("SiparisId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("KullaniciEmail")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("KullaniciId")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("SiparisId");
+
+                    b.ToTable("Siparisler");
+                });
+
+            modelBuilder.Entity("BuyTicket.Models.SiparisFilm", b =>
+                {
+                    b.Property<int>("SiparisFilmId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("Adet")
+                        .HasColumnType("int");
+
+                    b.Property<int>("FilmId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Fiyat")
+                        .HasColumnType("int");
+
+                    b.Property<int>("SiparisId")
+                        .HasColumnType("int");
+
+                    b.HasKey("SiparisFilmId");
+
+                    b.HasIndex("FilmId");
+
+                    b.HasIndex("SiparisId");
+
+                    b.ToTable("SiparisFilmler");
                 });
 
             modelBuilder.Entity("BuyTicket.Models.Yonetmen", b =>
@@ -131,13 +185,17 @@ namespace BuyTicket.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("YonetmenAdSoyad")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasMaxLength(30)
+                        .HasColumnType("nvarchar(30)");
 
                     b.Property<string>("YonetmenFotografi")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("YonetmenHakkinda")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasMaxLength(1000)
+                        .HasColumnType("nvarchar(1000)");
 
                     b.HasKey("YonetmenId");
 
@@ -182,6 +240,25 @@ namespace BuyTicket.Migrations
                     b.Navigation("Oyuncu");
                 });
 
+            modelBuilder.Entity("BuyTicket.Models.SiparisFilm", b =>
+                {
+                    b.HasOne("BuyTicket.Models.Film", "Film")
+                        .WithMany()
+                        .HasForeignKey("FilmId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("BuyTicket.Models.Siparis", "Siparis")
+                        .WithMany("SiparisFilmler")
+                        .HasForeignKey("SiparisId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Film");
+
+                    b.Navigation("Siparis");
+                });
+
             modelBuilder.Entity("BuyTicket.Models.Film", b =>
                 {
                     b.Navigation("FilmlerOyuncular");
@@ -195,6 +272,11 @@ namespace BuyTicket.Migrations
             modelBuilder.Entity("BuyTicket.Models.Sinema", b =>
                 {
                     b.Navigation("Filmler");
+                });
+
+            modelBuilder.Entity("BuyTicket.Models.Siparis", b =>
+                {
+                    b.Navigation("SiparisFilmler");
                 });
 
             modelBuilder.Entity("BuyTicket.Models.Yonetmen", b =>

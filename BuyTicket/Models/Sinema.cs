@@ -13,7 +13,6 @@ namespace BuyTicket.Models
         public string SinemaFotografi { get; set; }
 
         [Required(ErrorMessage = "Lütfen isim giriniz")]
-        [StringLength(30, MinimumLength = 5, ErrorMessage = "Ad Soyad 5-30 karakter arasında olmalıdır.")]
         [Display(Name = "Sinema Adı")]
         public string SinemaAdi { get; set; }
 
