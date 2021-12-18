@@ -4,14 +4,16 @@ using BuyTicket.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace BuyTicket.Migrations
 {
     [DbContext(typeof(BiletDbContext))]
-    partial class BiletDbContextModelSnapshot : ModelSnapshot
+    [Migration("20211218111718_siparisFilm-FiyatTipiFloatYapildi")]
+    partial class siparisFilmFiyatTipiFloatYapildi
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

@@ -1,0 +1,55 @@
+﻿@model ICollection<Siparis>
+@{
+    ViewData["Title"] = "Siparişler";
+}
+
+<div class="row">
+
+        <table class="table table-dark">
+
+            <thead>
+                <tr>
+                    <th>Sipariş Numarası</th>
+                    <th style="padding-left:100px;">Ürünler</th>
+                    <th>Toplam Tutar</th>
+                    <th>Kullanıcı</th>
+
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var siparis in Model)
+                {
+                    <tr>
+                        <td class="align-middle">@siparis.SiparisId</td>
+                        <td class="align-middle">
+                            <ul>
+                                @foreach (var film in siparis.SiparisFilmler)
+                                {
+                                    <li>
+                                        <div>
+                                           @((film.Fiyat*film.Adet).ToString("c")) - @film.Film.FilmAdi (@film.Adet Bilet)
+                                        </div>
+
+                                    </li>
+
+                                }
+
+                            </ul>
+                        </td>
+                        <td class="align-middle">
+                            @siparis.SiparisFilmler.Select(m => m.Film.FilmUcreti * m.Adet).Sum().ToString("c")
+                        </td>
+                        <td class="align-middle">---</td>
+                    </tr>
+                }
+            </tbody>
+
+        </table>
+
+
+</div>
+
+<div class="text-center">
+    <a class="btn btn-dark" asp-controller="Film" asp-action="Index">Ana Sayfaya Dön</a>
+</div>
+

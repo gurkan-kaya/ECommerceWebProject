@@ -34,6 +34,14 @@ namespace BuyTicket.Data.Repositories
         return Sepettekiler ?? (Sepettekiler = _context.Sepetler.Where(m => m.SepetNo == SepetNo).Include(m => m.Film).ToList());
         }
 
+        public async Task SepetiBosalt()
+        {
+            var urunler= Sepettekiler ?? (Sepettekiler = await _context.Sepetler.Where(m => m.SepetNo == SepetNo).ToListAsync());
+            _context.Sepetler.RemoveRange(urunler);
+            await _context.SaveChangesAsync();
+        }
+
+
         public void SepeteEkle(Film film)
         {
             var eklenecekUrun = _context.Sepetler.FirstOrDefault(m => m.Film.FilmId == film.FilmId && m.SepetNo == SepetNo);
@@ -85,6 +93,8 @@ namespace BuyTicket.Data.Repositories
 
             return new SepetRepository(context) { SepetNo = sepetId };
         }
+
+
 
 
 

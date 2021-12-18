@@ -9,7 +9,7 @@ namespace BuyTicket.Models
     public class SiparisFilm
     {
         public int SiparisFilmId { get; set; }
-        public int Fiyat { get; set; }
+        public float Fiyat { get; set; }
         public int Adet { get; set; }
 
         public int FilmId { get; set; }

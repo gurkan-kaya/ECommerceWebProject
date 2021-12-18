@@ -34,7 +34,7 @@ namespace BuyTicket
             services.AddScoped<ISinemaRepository, SinemaRepository>();
             services.AddScoped<IYonetmenRepository, YonetmenRepository>();
             services.AddScoped<IFilmRepository, FilmRepository>();
-            
+            services.AddScoped<ISiparisRepository, SiparisRepository>();
 
             //Alýþveriþ sepeti için konfigürasonlar 
             //singleton servisler sadece ilk requestte oluþturulurlar.
