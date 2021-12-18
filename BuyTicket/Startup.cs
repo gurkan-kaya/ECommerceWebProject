@@ -1,10 +1,13 @@
 using BuyTicket.Data;
 using BuyTicket.Data.Repositories;
 using BuyTicket.Data.Repositories.Abstract;
+using BuyTicket.Models;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -40,7 +43,23 @@ namespace BuyTicket
             //singleton servisler sadece ilk requestte oluþturulurlar.
             services.AddSingleton<IHttpContextAccessor,HttpContextAccessor>();   
             services.AddScoped(sr => SepetRepository.AlisVerisSepetiniGetir(sr));
+
+
+
+            services.AddIdentity<Kullanici, IdentityRole>(
+                o => {
+
+                    o.Password.RequireDigit = false;
+                    o.Password.RequireLowercase = false;
+                    o.Password.RequireUppercase = false;
+                    o.Password.RequireNonAlphanumeric = false;
+                    o.Password.RequiredLength = 3;
+                }
+                ).AddEntityFrameworkStores<BiletDbContext>();
+            services.AddMemoryCache();
             services.AddSession();
+            services.AddAuthentication(); 
+
 
             services.AddControllersWithViews();
         }
@@ -63,6 +82,8 @@ namespace BuyTicket
 
             app.UseRouting();
             app.UseSession();
+            app.UseAuthentication();
+
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
@@ -73,6 +94,7 @@ namespace BuyTicket
             });
 
            BiletDbInitializer.EklenecekVeriler(app);
+           BiletDbInitializer.KullaniciVeRolEkle(app).Wait();
         }
     }
 }

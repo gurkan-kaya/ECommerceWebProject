@@ -1,5 +1,6 @@
 ﻿using BuyTicket.Models;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
@@ -573,6 +574,52 @@ namespace BuyTicket.Data
 
 
             
+        }
+    
+        public static async Task KullaniciVeRolEkle(IApplicationBuilder ab)
+        {
+            using(var scope = ab.ApplicationServices.CreateScope())
+            {
+                var rm = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
+                if(!await rm.RoleExistsAsync(Roller.Admin))
+                {
+                    await rm.CreateAsync(new IdentityRole(Roller.Admin));
+                }
+                if (!await rm.RoleExistsAsync(Roller.Kullanici))
+                {
+                    await rm.CreateAsync(new IdentityRole(Roller.Kullanici));
+                }
+
+
+                var um = scope.ServiceProvider.GetRequiredService<UserManager<Kullanici>>();
+                var admin = await um.FindByEmailAsync("g181210102@sakarya.edu.tr");
+                if (admin == null)
+                {
+                    var adminOlustur = new Kullanici()
+                    {
+                        AdSoyad = "Admin",
+                        UserName = "admin",
+                        Email = "g181210102@sakarya.edu.tr",
+                        EmailConfirmed = true                   
+                    };
+                    await um.CreateAsync(adminOlustur, "123");
+                    await um.AddToRoleAsync(adminOlustur, Roller.Admin);
+                }
+
+                var kullanici = await um.FindByEmailAsync("gurkankaya@gmail.com");
+                if (kullanici == null)
+                {
+                    var kullaniciOlustur = new Kullanici()
+                    {
+                        AdSoyad = "Gurkan Kaya",
+                        UserName = "gurkankaya",
+                        Email = "gurkankaya@gmail.com",
+                        EmailConfirmed = true
+                    };
+                    await um.CreateAsync(kullaniciOlustur, "123");
+                    await um.AddToRoleAsync(kullaniciOlustur, Roller.Kullanici);
+                }
+            }
         }
     }
 }

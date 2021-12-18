@@ -1,4 +1,5 @@
 ﻿using BuyTicket.Models;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace BuyTicket.Data
 {
-    public class BiletDbContext:DbContext
+    public class BiletDbContext:IdentityDbContext<Kullanici>
     {
         public BiletDbContext(DbContextOptions<BiletDbContext> options)
             : base(options)
