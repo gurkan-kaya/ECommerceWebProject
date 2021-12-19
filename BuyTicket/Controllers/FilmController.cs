@@ -1,6 +1,7 @@
 ﻿using BuyTicket.Data;
 using BuyTicket.Data.Repositories.Abstract;
 using BuyTicket.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -13,6 +14,7 @@ using System.Threading.Tasks;
 
 namespace BuyTicket.Controllers
 {
+    [Authorize(Roles =Roller.Admin)]
     public class FilmController : Controller
     {
         private readonly IFilmRepository _repo;
@@ -20,12 +22,14 @@ namespace BuyTicket.Controllers
         {
             _repo = repo;
         }
+
+        [AllowAnonymous]
         public async Task<IActionResult> Index()
         {
             var filmler = await _repo.ListAll(m => m.Sinema);
             return View(filmler);
         }
-
+        [AllowAnonymous]
         public IActionResult Details(int id)
         {
 
@@ -169,6 +173,7 @@ namespace BuyTicket.Controllers
 
         }
 
+        [AllowAnonymous]
         public async Task<IActionResult> AramaSonucu(string arananFilm)
         {
             var filmler = await  _repo.ListAll(m => m.Sinema);
