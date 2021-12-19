@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿@inject Microsoft.AspNetCore.Identity.UserManager<Kullanici> kullanici
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -42,34 +44,7 @@
 
                         </li>
 
-                        <li class="nav-item rounded" style=" margin-left: 20px; ">
-                            <a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="Index">
-                                Üye Ol
-                                <img src="~/images/sign-up.png" style="width: 30px; height: 30px; display: inline-block;" />
-                            </a>
-                        </li>
-                        <li class="nav-item rounded" style="margin-left: 20px; ">
-                            <a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="Privacy">
-                                Giriş Yap
-                                <img src="~/images/login.png" style="width: 30px; height: 30px; display: inline-block;" />
-                            </a>
-                        </li>
-                        <li class="nav-item rounded" style="margin-left: 20px; ">
-                            <a class="nav-link text-light" asp-area="" asp-controller="Siparis" asp-action="Index">
-                                Sepet
-                                <img src="~/images/shopping-cart.png" style="width: 30px; height: 30px; display: inline-block;" />
-                            </a>
 
-                        </li>
-                        <li class="nav-item rounded dropdown" style="margin-left: 20px;">
-                            <button class="btn btn-outline-light dropdown-toggle text-dark" type="button" id="kullanici" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Hoşgeldiniz, Kullanıcı!
-                            </button>
-
-                            <div class="dropdown-menu" aria-labelledby="kullanici" >
-                                <a class="dropdown-item" asp-controller="Siparis" asp-action="TumSiparisler">Siparişlerim</a>
-                            </div>
-                        </li>
                     </ul>
 
                 </div>
