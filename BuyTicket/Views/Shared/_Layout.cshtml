@@ -45,6 +45,45 @@
                         </li>
 
 
+
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            <li class="nav-item rounded" style="margin-left: 20px; ">
+                                <a class="nav-link text-light" asp-area="" asp-controller="Siparis" asp-action="Index">
+                                    Sepet
+                                    <img src="~/images/shopping-cart.png" style="width: 30px; height: 30px; display: inline-block;" />
+                                </a>
+
+                            </li>
+                            <li class="nav-item rounded dropdown" style="margin-left: 20px;">
+                                <button class="btn btn-outline-light dropdown-toggle text-dark" type="button" id="kullanici" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Hoşgeldiniz, @kullanici.GetUserName(User)
+                                </button>
+                                <div class="dropdown-menu" aria-labelledby="kullanici">
+                                    <a class="dropdown-item text-center" asp-controller="Siparis" asp-action="TumSiparisler">Siparişlerim</a>
+                                    <form asp-controller="Hesap" asp-action="Cikis">
+                                        <button class="dropdown-item" style="background:none;border:none; text-align:center;">Çıkış Yap</button>
+                                    </form>
+                                </div>
+                            </li>
+                        }
+
+                        else
+                        {
+                            <li class="nav-item rounded" style=" margin-left: 20px; ">
+                                <a class="nav-link text-light" asp-area="" asp-controller="Hesap" asp-action="Uyelik">
+                                    Üye Ol
+                                    <img src="~/images/sign-up.png" style="width: 30px; height: 30px; display: inline-block;" />
+                                </a>
+                            </li>
+                            <li class="nav-item rounded" style="margin-left: 20px; ">
+                                <a class="nav-link text-light" asp-area="" asp-controller="Hesap" asp-action="Giris">
+                                    Giriş Yap
+                                    <img src="~/images/login.png" style="width: 30px; height: 30px; display: inline-block;" />
+                                </a>
+                            </li>
+                        }
+
                     </ul>
 
                 </div>
