@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿@inject Microsoft.AspNetCore.Identity.UserManager<Kullanici> kullanici
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -9,7 +11,7 @@
 </head>
 <body style="background: linear-gradient(45deg, gray, #C0C0C0);">
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark border-bottom box-shadow mb-3" style="background: linear-gradient(45deg, #C0C0C0, gray); ">
+        <nav class="navbar navbar-expand-lg navbar-dark border-bottom box-shadow mb-3" style="background: linear-gradient(45deg, #C0C0C0, gray); ">
             <div class="container">
                 <a class="navbar-brand" asp-controller="Film" asp-action="Index">
                     <img src="~/images/Logo.png">
@@ -20,47 +22,68 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <form class="form-inline" asp-controller="Film" asp-action="AramaSonucu">
-                    <input type="search" class="form-control rounded " placeholder="Film Ara" aria-label="Search"
+                    <input type="search" name="arananFilm" class="form-control rounded " placeholder="Film Ara" aria-label="Search"
                            aria-describedby="search-addon" />
 
                     <button type="submit" class="btn btn-light" style="margin-left:3px;">ARA</button>
                 </form>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                <div class="navbar-collapse collapse d-md-inline-flex justify-content-between">
 
                     <ul class="navbar-nav flex-grow-1 flex-sm-row-reverse">
 
-
                         <li class="nav-item dropdown">
-                            <button class="btn btn-outline-light dropdown-toggle nav-link text-dark" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <button class="btn btn-outline-light dropdown-toggle text-dark" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 Admin Menü
                             </button>
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                 <a class="dropdown-item" asp-controller="Oyuncu" asp-action="Index">Oyuncular</a>
                                 <a class="dropdown-item" asp-controller="Yonetmen" asp-action="Index">Yönetmenler</a>
                                 <a class="dropdown-item" asp-controller="Sinema" asp-action="Index">Sinemalar</a>
+                                <a class="dropdown-item" asp-controller="Film" asp-action="Create">Film Ekle</a>
                             </div>
 
                         </li>
 
-                        <li class="nav-item rounded" style=" margin-left: 20px; margin-right:50px; ">
-                            <a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="Index">
-                                Üye Ol
-                                <img src="~/images/sign-up.png" style="width: 30px; height: 30px; display: inline-block;" />
-                            </a>
-                        </li>
-                        <li class="nav-item rounded" style="margin-left: 20px; ">
-                            <a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="Privacy">
-                                Giriş Yap
-                                <img src="~/images/login.png" style="width: 30px; height: 30px; display: inline-block;" />
-                            </a>
-                        </li>
-                        <li class="nav-item rounded" style="margin-left: 20px; ">
-                            <a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="Privacy">
-                                Sepet
-                                <img src="~/images/shopping-cart.png" style="width: 30px; height: 30px; display: inline-block;" />
-                            </a>
 
-                        </li>
+
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            <li class="nav-item rounded" style="margin-left: 20px; ">
+                                <a class="nav-link text-light" asp-area="" asp-controller="Siparis" asp-action="Index">
+                                    Sepet
+                                    <img src="~/images/shopping-cart.png" style="width: 30px; height: 30px; display: inline-block;" />
+                                </a>
+
+                            </li>
+                            <li class="nav-item rounded dropdown" style="margin-left: 20px;">
+                                <button class="btn btn-outline-light dropdown-toggle text-dark" type="button" id="kullanici" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Hoşgeldiniz, @kullanici.GetUserName(User)
+                                </button>
+                                <div class="dropdown-menu" aria-labelledby="kullanici">
+                                    <a class="dropdown-item text-center" asp-controller="Siparis" asp-action="TumSiparisler">Siparişlerim</a>
+                                    <form asp-controller="Hesap" asp-action="Cikis">
+                                        <button class="dropdown-item" style="background:none;border:none; text-align:center;">Çıkış Yap</button>
+                                    </form>
+                                </div>
+                            </li>
+                        }
+
+                        else
+                        {
+                            <li class="nav-item rounded" style=" margin-left: 20px; ">
+                                <a class="nav-link text-light" asp-area="" asp-controller="Hesap" asp-action="Uyelik">
+                                    Üye Ol
+                                    <img src="~/images/sign-up.png" style="width: 30px; height: 30px; display: inline-block;" />
+                                </a>
+                            </li>
+                            <li class="nav-item rounded" style="margin-left: 20px; ">
+                                <a class="nav-link text-light" asp-area="" asp-controller="Hesap" asp-action="Giris">
+                                    Giriş Yap
+                                    <img src="~/images/login.png" style="width: 30px; height: 30px; display: inline-block;" />
+                                </a>
+                            </li>
+                        }
+
                     </ul>
 
                 </div>
