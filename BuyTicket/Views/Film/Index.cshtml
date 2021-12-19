@@ -14,16 +14,18 @@
                         <div class="card-header text-white bg-dark">
                             <p class="card-text">
                                 <h3 class="card-title text-center">
-                                    <a class=" btn btn-outline-secondary text-white float-left" style="font-size:large" asp-action="Edit" asp-route-id="@item.FilmId">Düzenle</a>
+                                    @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
+                                    {<a class=" btn btn-outline-secondary text-white float-left" style="font-size:large" asp-action="Edit" asp-route-id="@item.FilmId">Düzenle</a>}
                                     @item.FilmAdi
-                                    <a class="btn btn-outline-secondary text-white float-right" style="font-size:large"  asp-action="Delete" asp-route-id="@item.FilmId">Sil</a>
+                                    @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
+                                    {<a class="btn btn-outline-secondary text-white float-right" style="font-size:large" asp-action="Delete" asp-route-id="@item.FilmId">Sil</a>}
                                 </h3>
                             </p>
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="card-body">
-                            <p class="card-text rounded" style="background-color: whitesmoke;">@item.FilmHakkinda.Substring(0, item.FilmHakkinda.Substring(0, 100).LastIndexOf(" ")) ...</p>
+                            <p class="card-text rounded" style="background-color: whitesmoke;">@item.FilmHakkinda.Substring(0, 100) ...</p>
                             <p class="card-text rounded" style="background-color:whitesmoke;"><b>Kategori: </b>@item.FilmKategorisi</p>
                             <p class="card-text rounded" style="background-color: whitesmoke;"><b>Sinema: </b>@item.Sinema.SinemaAdi</p>
                             <p class="card-text rounded" style="background-color:whitesmoke;">

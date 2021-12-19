@@ -6,9 +6,12 @@
 
 <h1>SİNEMALAR</h1>
 
-<p>
+@if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
+{ <p>
     <a asp-action="Create" class="btn btn-outline-dark">Yeni Sinema Ekle</a>
-</p>
+ </p>
+}
+
 <table class="table">
     <thead>
         <tr class="text-center text-uppercase">
@@ -25,25 +28,28 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr class="text-center">
-            <td>
-                <img src="@item.SinemaFotografi" asp-append-version="true" style="width:200px; height:200px;">
-            </td>
-            <td class="font-weight-bold">
-                @Html.DisplayFor(modelItem => item.SinemaAdi)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.SinemaHakkinda)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.SinemaId" class="btn btn-secondary btn-block">Düzenle</a>
-                <br />
-                <a asp-action="Details" asp-route-id="@item.SinemaId" class="btn btn-info btn-block">Detaylar</a>
-                <br />
-                <a asp-action="Delete" asp-route-id="@item.SinemaId" class="btn btn-dark btn-block">Sil</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr class="text-center">
+                <td>
+                    <img src="@item.SinemaFotografi" asp-append-version="true" style="width:200px; height:200px;">
+                </td>
+                <td class="font-weight-bold">
+                    @Html.DisplayFor(modelItem => item.SinemaAdi)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SinemaHakkinda)
+                </td>
+                <td>
+                    @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
+                    {<a asp-action="Edit" asp-route-id="@item.SinemaId" class="btn btn-secondary btn-block">Düzenle</a>
+                        <br />
+                        <a asp-action="Details" asp-route-id="@item.SinemaId" class="btn btn-info btn-block">Detaylar</a>
+                        <br />
+                        <a asp-action="Delete" asp-route-id="@item.SinemaId" class="btn btn-dark btn-block">Sil</a>}
+
+                </td>
+            </tr>
+        }
     </tbody>
 </table>

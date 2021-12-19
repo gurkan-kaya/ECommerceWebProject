@@ -1,14 +1,18 @@
-﻿using BuyTicket.Data.Repositories;
+﻿using BuyTicket.Data;
+using BuyTicket.Data.Repositories;
 using BuyTicket.Data.Repositories.Abstract;
 using BuyTicket.Models.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace BuyTicket.Controllers
 {
+    [Authorize]
     public class SiparisController : Controller
     {
         private readonly ISiparisRepository _siparisRepo;
@@ -38,8 +42,10 @@ namespace BuyTicket.Controllers
 
         public async Task< IActionResult> TumSiparisler()
         {
-            string kullaniciId = "";
-            var siparisler = await _siparisRepo.SiparisleriGetir(kullaniciId);
+            //claim based, role based'ten farklı olarak talep bazlı bir yöntemdir.
+            string kullaniciId = User.FindFirstValue(ClaimTypes.NameIdentifier); //claim type nameidentifier ile id bulunabilir
+            string rol = User.FindFirstValue(ClaimTypes.Role);
+            var siparisler = await _siparisRepo.SiparisleriGetir(kullaniciId,rol);
             return View(siparisler);
         }
 
@@ -66,8 +72,9 @@ namespace BuyTicket.Controllers
        public async Task<IActionResult> SiparisiTamamla()
         {
             var urunler = _sepetRepo.SepeteEklenenler();
-            string kullaniciId = "";
-            string kullaniciEmail = "";
+            //claim based, role based'ten farklı olarak talep bazlı bir yöntemdir.
+            string kullaniciId = User.FindFirstValue(ClaimTypes.NameIdentifier); //claim type nameidentifier ile id bulunabilir
+            string kullaniciEmail = User.FindFirstValue(ClaimTypes.Email);
 
            await _siparisRepo.SiparisiKaydet(urunler, kullaniciId, kullaniciEmail);
            await _sepetRepo.SepetiBosalt();

@@ -31,18 +31,22 @@
 
                     <ul class="navbar-nav flex-grow-1 flex-sm-row-reverse">
 
-                        <li class="nav-item dropdown">
-                            <button class="btn btn-outline-light dropdown-toggle text-dark" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Admin Menü
-                            </button>
-                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                <a class="dropdown-item" asp-controller="Oyuncu" asp-action="Index">Oyuncular</a>
-                                <a class="dropdown-item" asp-controller="Yonetmen" asp-action="Index">Yönetmenler</a>
-                                <a class="dropdown-item" asp-controller="Sinema" asp-action="Index">Sinemalar</a>
-                                <a class="dropdown-item" asp-controller="Film" asp-action="Create">Film Ekle</a>
-                            </div>
+                        @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
+                        {
+                            <li class="nav-item dropdown">
+                                <button class="btn btn-outline-light dropdown-toggle text-dark" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Admin Menü
+                                </button>
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                    <a class="dropdown-item" asp-controller="Oyuncu" asp-action="Index">Oyuncular</a>
+                                    <a class="dropdown-item" asp-controller="Yonetmen" asp-action="Index">Yönetmenler</a>
+                                    <a class="dropdown-item" asp-controller="Sinema" asp-action="Index">Sinemalar</a>
+                                    <a class="dropdown-item" asp-controller="Film" asp-action="Create">Film Ekle</a>
+                                </div>
 
-                        </li>
+                            </li>
+                        }
+
 
 
 
@@ -60,24 +64,26 @@
                                     Hoşgeldiniz, @kullanici.GetUserName(User)
                                 </button>
                                 <div class="dropdown-menu" aria-labelledby="kullanici">
-                                    <a class="dropdown-item text-center" asp-controller="Siparis" asp-action="TumSiparisler">Siparişlerim</a>
-                                    <form asp-controller="Hesap" asp-action="Cikis">
-                                        <button class="dropdown-item" style="background:none;border:none; text-align:center;">Çıkış Yap</button>
-                                    </form>
-                                </div>
+                                    @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
+                                    {<a class="dropdown-item text-center" asp-controller="Account" asp-action="TumKullanicilar">Kayıtlı Kullanıcılar</a>}
+                                        <a class="dropdown-item text-center" asp-controller="Siparis" asp-action="TumSiparisler">Siparişler</a>
+                                        <form asp-controller="Account" asp-action="Cikis">
+                                            <button class="dropdown-item" style="background:none;border:none; text-align:center;">Çıkış Yap</button>
+                                        </form>
+                                    </div>
                             </li>
                         }
 
                         else
                         {
                             <li class="nav-item rounded" style=" margin-left: 20px; ">
-                                <a class="nav-link text-light" asp-area="" asp-controller="Hesap" asp-action="Uyelik">
+                                <a class="nav-link text-light" asp-area="" asp-controller="Account" asp-action="Uyelik">
                                     Üye Ol
                                     <img src="~/images/sign-up.png" style="width: 30px; height: 30px; display: inline-block;" />
                                 </a>
                             </li>
                             <li class="nav-item rounded" style="margin-left: 20px; ">
-                                <a class="nav-link text-light" asp-area="" asp-controller="Hesap" asp-action="Giris">
+                                <a class="nav-link text-light" asp-area="" asp-controller="Account" asp-action="Login">
                                     Giriş Yap
                                     <img src="~/images/login.png" style="width: 30px; height: 30px; display: inline-block;" />
                                 </a>
@@ -111,9 +117,9 @@
             <div class="row">
                 <div class="col-md-5 mt-md-0 mt-3">
                     <h5 class="text-uppercase font-weight-bold">BİZİ TAKİP EDİN</h5>
-                    <p>INSTA LOGO</p>
-                    <p>FACEBOOK LOGO</p>
-                    <p>YOUTUBE LOGO</p>
+                    <p>INSTAGRAM</p>
+                    <p>FACEBOOK</p>
+                    <p>YOUTUBE</p>
                 </div>
 
                 <div class="col-md-4 mb-md-0 mb-3 ">

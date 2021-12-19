@@ -12,7 +12,8 @@
                     <th>Sipariş Numarası</th>
                     <th style="padding-left:100px;">Ürünler</th>
                     <th>Toplam Tutar</th>
-                    <th>Kullanıcı</th>
+                    @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
+                    { <th>Kullanıcı</th>}
 
                 </tr>
             </thead>
@@ -39,7 +40,9 @@
                         <td class="align-middle">
                             @siparis.SiparisFilmler.Select(m => m.Film.FilmUcreti * m.Adet).Sum().ToString("c")
                         </td>
-                        <td class="align-middle">---</td>
+                         @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
+                    {<td class="align-middle">@siparis.Kullanici.UserName</td> }
+                        
                     </tr>
                 }
             </tbody>

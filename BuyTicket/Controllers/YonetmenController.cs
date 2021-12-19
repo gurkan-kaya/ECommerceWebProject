@@ -1,7 +1,7 @@
 ﻿using BuyTicket.Data;
-using BuyTicket.Data.Abstract;
 using BuyTicket.Data.Repositories.Abstract;
 using BuyTicket.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -13,6 +13,7 @@ using System.Threading.Tasks;
 
 namespace BuyTicket.Controllers
 {
+    [Authorize(Roles = Roller.Admin)]
     public class YonetmenController : Controller
     {
         private readonly IYonetmenRepository _repo;
@@ -21,6 +22,8 @@ namespace BuyTicket.Controllers
         {
             _repo = repo;
         }
+
+        [AllowAnonymous]
         public async Task<IActionResult> Index()
         {
             var yonetmenler = await _repo.ListAll(); ;
@@ -61,7 +64,7 @@ namespace BuyTicket.Controllers
             return View();
         }
 
-
+        [AllowAnonymous]
         public IActionResult Details(int id)
         {
 

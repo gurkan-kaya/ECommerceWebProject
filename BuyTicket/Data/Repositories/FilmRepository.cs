@@ -27,8 +27,19 @@ namespace BuyTicket.Data.Repositories
         public void Delete(int id)
         {
             var silinecekFilm = _context.Filmler.FirstOrDefault(m => m.FilmId == id);
+            var ilgilisepet = _context.Sepetler.Where(b => b.Film.FilmId == silinecekFilm.FilmId).AsEnumerable();
+            foreach (var sp in ilgilisepet)
+            {
+                var s = sp;
+                _context.Sepetler.Remove(s);
+            }
+  
             _context.Filmler.Remove(silinecekFilm);
             _context.SaveChanges();
+
+            //var silinecekFilm = _context.Filmler.FirstOrDefault(m => m.FilmId == id);
+            // _context.Filmler.Remove(silinecekFilm);
+            //_context.SaveChanges();
         }
 
         public async Task FilmEkle(FilmVM fvm)

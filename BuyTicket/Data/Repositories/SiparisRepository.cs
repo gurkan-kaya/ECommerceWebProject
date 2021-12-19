@@ -41,9 +41,13 @@ namespace BuyTicket.Data.Repositories
           
         }
 
-        public async Task<ICollection<Siparis>> SiparisleriGetir(string kullaniciId)
+        public async Task<ICollection<Siparis>> SiparisleriGetir(string kullaniciId, string rol)
         {
-            var siparisler = await _context.Siparisler.Include(m => m.SiparisFilmler).ThenInclude(m => m.Film).Where(m => m.KullaniciId == kullaniciId).ToListAsync();
+            var siparisler = await _context.Siparisler.Include(m => m.SiparisFilmler).ThenInclude(m => m.Film).Include(m=>m.Kullanici).ToListAsync();
+            if(rol!="Admin")
+            {
+                siparisler = siparisler.Where(m => m.KullaniciId == kullaniciId).ToList();
+            }
             return siparisler;
         }
     }

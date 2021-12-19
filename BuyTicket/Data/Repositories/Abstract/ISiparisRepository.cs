@@ -8,7 +8,7 @@ namespace BuyTicket.Data.Repositories.Abstract
 {
     public interface ISiparisRepository
     {
-        Task<ICollection<Siparis>> SiparisleriGetir(string kullaniciId);
+        Task<ICollection<Siparis>> SiparisleriGetir(string kullaniciId, string rol);
         Task SiparisiKaydet(ICollection<Sepet> urunler, string kullaniciId, string kullaniciEmail);
     }
 }

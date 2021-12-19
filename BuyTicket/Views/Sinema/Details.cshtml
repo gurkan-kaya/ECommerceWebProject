@@ -30,6 +30,7 @@
     </dl>
 </div>
 <div>
-    <a class="btn btn-outline-light text-dark" asp-action="Edit" asp-route-id="@Model.SinemaId">Düzenle</a>
+    @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
+    {    <a class="btn btn-outline-light text-dark" asp-action="Edit" asp-route-id="@Model.SinemaId">Düzenle</a> }
     <a class="btn btn-secondary ml-3" asp-action="Index">Geri Dön</a>
 </div>
