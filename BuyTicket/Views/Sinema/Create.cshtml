@@ -1,0 +1,36 @@
+﻿@model BuyTicket.Models.Sinema
+
+@{
+    ViewData["Title"] = "Sinema Ekle";
+}
+
+<h2>Sinema Ekle</h2>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post" enctype="multipart/form-data" asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="SinemaFotografi" class="control-label"></label>
+                <input asp-for="SinemaFotografi" type="file" name="file" class="form-control" />
+                <span asp-validation-for="SinemaFotografi" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SinemaAdi" class="control-label"></label>
+                <input asp-for="SinemaAdi" class="form-control" />
+                <span asp-validation-for="SinemaAdi" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SinemaHakkinda" class="control-label"></label>
+                <textarea asp-for="SinemaHakkinda" rows="5" class="form-control"></textarea>
+                <span asp-validation-for="SinemaHakkinda" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-outline-light text-dark" />
+                <a class="btn btn-secondary float-right" asp-action="Index">Geri Dön</a>
+            </div>
+        </form>
+    </div>
+</div>
+

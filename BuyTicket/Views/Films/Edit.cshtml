@@ -1,0 +1,76 @@
+﻿@model BuyTicket.Models.Film
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>Film</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="FilmId" />
+            <div class="form-group">
+                <label asp-for="FilmAdi" class="control-label"></label>
+                <input asp-for="FilmAdi" class="form-control" />
+                <span asp-validation-for="FilmAdi" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="FilmHakkinda" class="control-label"></label>
+                <input asp-for="FilmHakkinda" class="form-control" />
+                <span asp-validation-for="FilmHakkinda" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="FilmBaslamaSaati1" class="control-label"></label>
+                <input asp-for="FilmBaslamaSaati1" class="form-control" />
+                <span asp-validation-for="FilmBaslamaSaati1" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="FilmBaslamaSaati2" class="control-label"></label>
+                <input asp-for="FilmBaslamaSaati2" class="form-control" />
+                <span asp-validation-for="FilmBaslamaSaati2" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="FilmBaslamaSaati3" class="control-label"></label>
+                <input asp-for="FilmBaslamaSaati3" class="form-control" />
+                <span asp-validation-for="FilmBaslamaSaati3" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="FilmFotografi" class="control-label"></label>
+                <input asp-for="FilmFotografi" class="form-control" />
+                <span asp-validation-for="FilmFotografi" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="FilmKategorisi" class="control-label"></label>
+                <select asp-for="FilmKategorisi" class="form-control"></select>
+                <span asp-validation-for="FilmKategorisi" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="FilmUcreti" class="control-label"></label>
+                <input asp-for="FilmUcreti" class="form-control" />
+                <span asp-validation-for="FilmUcreti" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SinemaId" class="control-label"></label>
+                <select asp-for="SinemaId" class="form-control" asp-items="ViewBag.SinemaId"></select>
+                <span asp-validation-for="SinemaId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="YonetmenId" class="control-label"></label>
+                <select asp-for="YonetmenId" class="form-control" asp-items="ViewBag.YonetmenId"></select>
+                <span asp-validation-for="YonetmenId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+

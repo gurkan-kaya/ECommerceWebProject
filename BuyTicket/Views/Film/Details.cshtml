@@ -1,0 +1,90 @@
+﻿@model BuyTicket.Models.Film
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+
+<div>
+    <h4>Film Bilgileri</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2 pb-5 align-self-center">
+            @Html.DisplayNameFor(model => model.FilmAdi)
+        </dt>
+        <dd class="col-sm-10 font-weight-bold ">
+            @Html.DisplayFor(model => model.FilmAdi)
+        </dd>
+        <dt class="col-sm-2 pb-5 align-self-center">
+            @Html.DisplayNameFor(model => model.FilmFotografi)
+        </dt>
+        <dd class="col-sm-10">
+            <img style="width:200px; height:250px;" src="@Model.FilmFotografi" asp-append-version="true">
+        </dd>
+        <dt class="col-sm-2 pb-5 align-self-center">
+            @Html.DisplayNameFor(model => model.FilmHakkinda)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.FilmHakkinda)
+        </dd>
+        <dt class="col-sm-2 pb-5 align-self-center">
+            @Html.DisplayNameFor(model => model.FilmBaslamaSaati1)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.FilmBaslamaSaati1)
+            @Html.DisplayFor(model => model.FilmBaslamaSaati2)
+            @Html.DisplayFor(model => model.FilmBaslamaSaati3)
+        </dd>
+
+        <dt class="col-sm-2 pb-5 align-self-center">
+            @Html.DisplayNameFor(model => model.FilmKategorisi)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.FilmKategorisi)
+        </dd>
+        <dt class="col-sm-2 pb-5 align-self-center">
+            @Html.DisplayNameFor(model => model.FilmUcreti)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.FilmUcreti) TL
+        </dd>
+        <dt class="col-sm-2 pb-5 align-self-center">
+            @Html.DisplayNameFor(model => model.Sinema)
+        </dt>
+        <dd class="col-sm-10">
+            <a asp-controller="Sinema" asp-action="Details" asp-route-id="@Model.Sinema.SinemaId">
+                @Model.Sinema.SinemaAdi
+            </a>
+        </dd>
+        <dt class="col-sm-2 pb-5 align-self-center">
+            @Html.DisplayNameFor(model => model.Yonetmen)
+        </dt>
+        <dd class="col-sm-10">
+            <a asp-controller="Yonetmen" asp-action="Details" asp-route-id="@Model.Yonetmen.YonetmenId">
+                @Model.Yonetmen.YonetmenAdSoyad
+            </a>
+        </dd>
+        <dt class="col-sm-2 pb-5 align-self-center">
+            @Html.DisplayNameFor(model => model.FilmlerOyuncular)
+        </dt>
+        <dd class="row col-sm-10">
+            @foreach(var item in Model.FilmlerOyuncular)
+            {
+            <div class="column mr-5">
+                <img style="width:100px; height:150px;" src="@item.Oyuncu.OyuncuFotografi" asp-append-version="true">
+                <br />
+                <a asp-controller="Oyuncu" asp-action="Details" asp-route-id="@item.Oyuncu.OyuncuId">
+                    @item.Oyuncu.OyuncuAdSoyad
+                </a>
+            </div>
+            }
+            
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-controller="Siparis" asp-action="SepeteEkleArtir" asp-route-id="@Model.FilmId" class="btn btn-dark text-white">
+        Bilet Al  @Model.FilmUcreti TL
+    </a>
+    <a class="btn btn-secondary ml-3" asp-action="Index">Geri Dön</a>
+</div>

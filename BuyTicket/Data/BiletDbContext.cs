@@ -1,4 +1,5 @@
 ﻿using BuyTicket.Models;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace BuyTicket.Data
 {
-    public class BiletDbContext:DbContext
+    public class BiletDbContext:IdentityDbContext<Kullanici>
     {
         public BiletDbContext(DbContextOptions<BiletDbContext> options)
             : base(options)
@@ -26,11 +27,17 @@ namespace BuyTicket.Data
             base.OnModelCreating(modelBuilder);
         }
 
-        //
+        
         public DbSet<Film> Filmler { get; set; }
         public DbSet<Oyuncu> Oyuncular { get; set; }
         public DbSet<Sinema> Sinemalar { get; set; }
         public DbSet<Yonetmen> Yonetmenler { get; set; }    
         public DbSet<FilmOyuncu> FilmlerOyuncular { get; set; }
+        public DbSet<Siparis> Siparisler { get; set; }
+        public DbSet<SiparisFilm> SiparisFilmler { get; set; }
+
+        //sepetler->sepettekileri tutuyor
+        public DbSet<Sepet> Sepetler { get; set; }
+
     }
 }

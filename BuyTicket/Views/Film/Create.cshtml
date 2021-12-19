@@ -1,0 +1,80 @@
+﻿@model BuyTicket.Models.FilmVM
+@using BuyTicket.Data
+@{
+    ViewData["Title"] = "Film Ekle";
+}
+
+<h2>Film Ekle</h2>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post" enctype="multipart/form-data" asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="FilmAdi" class="control-label"></label>
+                <input asp-for="FilmAdi" class="form-control" />
+                <span asp-validation-for="FilmAdi" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="FilmHakkinda" class="control-label"></label>
+                <textarea asp-for="FilmHakkinda" rows="5" class="form-control"></textarea>
+                <span asp-validation-for="FilmHakkinda" class="text-danger"></span>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <label asp-for="FilmBaslamaSaati1" class="control-label"></label>
+                </div>
+                <div class="form-group col-4">
+                    <input asp-for="FilmBaslamaSaati1" type="time" class="form-control" />
+                    <span asp-validation-for="FilmBaslamaSaati1" class="text-danger"></span>
+                </div>
+                <div class="form-group col-4">
+                    <input asp-for="FilmBaslamaSaati2" type="time" class="form-control" />
+                    <span asp-validation-for="FilmBaslamaSaati2" class="text-danger"></span>
+                </div>
+                <div class="form-group col-4">
+                    <input asp-for="FilmBaslamaSaati3" type="time" class="form-control" />
+                    <span asp-validation-for="FilmBaslamaSaati3" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label asp-for="FilmFotografi" class="control-label"></label>
+                <input asp-for="FilmFotografi" type="file" name="file" class="form-control" />
+                <span asp-validation-for="FilmFotografi" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="FilmKategorisi" class="control-label"></label>
+                <select class="form-control" asp-for="FilmKategorisi" asp-items="Html.GetEnumSelectList<FilmKategorisi>()">
+                    <option selected="selected" value="">Kategori Seçiniz</option>
+                </select>
+                <span asp-validation-for="FilmKategorisi" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="FilmUcreti" class="control-label"></label>
+                <input asp-for="FilmUcreti" type="number" class="form-control" />
+                <span asp-validation-for="FilmUcreti" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SinemaId" class="control-label"></label>
+                <select asp-for="SinemaId" class="form-control" asp-items="ViewBag.SinemaId"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="YonetmenId" class="control-label"></label>
+                <select asp-for="YonetmenId" class="form-control" asp-items="ViewBag.YonetmenId"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="OyuncuListesi" class="control-label"></label>
+                <select asp-for="OyuncuListesi" class="form-control" asp-items="ViewBag.OyuncuId" multiple></select>
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
