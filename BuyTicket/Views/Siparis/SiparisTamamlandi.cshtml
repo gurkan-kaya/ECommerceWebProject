@@ -1,10 +1,12 @@
-﻿<div class="row">
+﻿@inject Microsoft.AspNetCore.Mvc.Localization.IViewLocalizer localizer
+
+<div class="row">
     <div class="text-center alert alert-secondary col-md-6 offset-3">
-        <h1>Siparişiniz Oluşturuldu. </h1>
-        <h2>İyi Seyirler Dileriz.</h2>
+        <h1>@localizer["siparis"]</h1>
+        <h2>@localizer["iyiseyir"]</h2>
 
     </div>
 </div>
 <div class="text-center">
-    <a class="btn btn-secondary btn-group-lg " asp-controller="Film" asp-action="Index">Ana Sayfaya Dön</a>
+    <a class="btn btn-secondary btn-group-lg " asp-controller="Film" asp-action="Index">@localizer["anasayfa"]</a>
 </div>

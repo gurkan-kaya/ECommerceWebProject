@@ -10,7 +10,7 @@ namespace BuyTicket.Models
     {
         public int YonetmenId { get; set; }
 
-        [Display(Name=" Fotoğrafı")]
+        [Display(Name="Fotoğrafı")]
         public string YonetmenFotografi { get; set; }
 
         [Required(ErrorMessage = "Lütfen isim giriniz")]

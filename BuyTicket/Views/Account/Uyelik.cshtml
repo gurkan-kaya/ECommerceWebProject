@@ -1,51 +1,52 @@
 ﻿@model BuyTicket.Models.ViewModels.UyelikVM
 
-@{ 
+@{
     ViewData["Title"] = "Üye Ol";
 }
-
+@inject Microsoft.AspNetCore.Mvc.Localization.IViewLocalizer localizer
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
 </head>
 <body>
     <div class="container col-md-8 offset-2">
-        <h2 class="text-center">Üye Ol</h2>
+        <h2 class="text-center">@localizer["uyeol"]</h2>
 
-        @if (ViewBag.error != null) { 
-        <div class="alert alert-danger">
-            @ViewBag.error
-        </div>
+        @if (ViewBag.error != null)
+        {
+            <div class="alert alert-danger">
+                @ViewBag.error
+            </div>
         }
 
-    <form asp-action="Uyelik" method="post">
-        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-        <div class="form-group">
-            <label asp-for="AdSoyad" class="control-label"></label>
-            <input asp-for="AdSoyad" class="form-control" />
-            <span asp-validation-for="AdSoyad"></span>
-        </div>
-        <div class="form-group">
-            <label asp-for="Email" class="control-label"></label>
-            <input asp-for="Email" class="form-control" />
-            <span asp-validation-for="Email"></span>
-        </div>
-        <div class="form-group">
-            <label asp-for="Sifre" class="control-label"></label>
-            <input asp-for="Sifre" class="form-control" />
-            <span asp-validation-for="Sifre"></span>
-        </div>
-        <div class="form-group">
-            <label asp-for="SifreTekrar" class="control-label"></label>
-            <input asp-for="SifreTekrar" class="form-control" />
-            <span asp-validation-for="SifreTekrar"></span>
-        </div>
-        <div class="form-group text-center">
-            <input type="submit" class="btn btn-primary" name="name" value="Üye Ol" />
-            <a class="btn btn-secondary ml-3" asp-controller="Film" asp-action="Index">Geri Dön</a>
-        </div>
+        <form asp-action="Uyelik" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="AdSoyad" class="control-label"></label>
+                <input asp-for="AdSoyad" class="form-control" />
+                <span asp-validation-for="AdSoyad"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Email" class="control-label"></label>
+                <input asp-for="Email" class="form-control" />
+                <span asp-validation-for="Email"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Sifre" class="control-label"></label>
+                <input asp-for="Sifre" class="form-control" />
+                <span asp-validation-for="Sifre"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SifreTekrar" class="control-label"></label>
+                <input asp-for="SifreTekrar" class="form-control" />
+                <span asp-validation-for="SifreTekrar"></span>
+            </div>
+            <div class="form-group text-center">
+                <input type="submit" class="btn btn-primary" name="name" value="@localizer["uyeol"]" />
+                <a class="btn btn-secondary ml-3" asp-controller="Film" asp-action="Index">@localizer["geri"]</a>
+            </div>
 
-    </form>
+        </form>
     </div>
 </body>
 </html>

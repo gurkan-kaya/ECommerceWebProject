@@ -2,57 +2,61 @@
 @{
     ViewData["Title"] = "Siparişler";
 }
-
+@inject Microsoft.AspNetCore.Mvc.Localization.IViewLocalizer localizer
 <div class="row">
 
-        <table class="table table-dark">
+    <table class="table table-dark">
 
-            <thead>
+        <thead>
+            <tr>
+                <th>@localizer["siparisno"]</th>
+                <th style="padding-left:100px;">@localizer["urunler"]</th>
+                <th>@localizer["tutar"]</th>
+                @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
+                {
+                     <th>@localizer["kullanici"]</th>
+}
+
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var siparis in Model)
+            {
                 <tr>
-                    <th>Sipariş Numarası</th>
-                    <th style="padding-left:100px;">Ürünler</th>
-                    <th>Toplam Tutar</th>
+                    <td class="align-middle">@siparis.SiparisId</td>
+                    <td class="align-middle">
+                        <ul>
+                            @foreach (var film in siparis.SiparisFilmler)
+                            {
+                                <li>
+                                    <div>
+                                        @((film.Fiyat * film.Adet).ToString()) TL - @film.Film.FilmAdi (@film.Adet @localizer["bilet"])
+                                    </div>
+
+                                </li>
+
+                            }
+
+                        </ul>
+                    </td>
+                    <td class="align-middle">
+                        @siparis.SiparisFilmler.Select(m => m.Film.FilmUcreti * m.Adet).Sum().ToString() TL
+                    </td>
                     @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
-                    { <th>Kullanıcı</th>}
+                    {
+                        <td class="align-middle">@siparis.Kullanici.UserName</td>
+}
 
                 </tr>
-            </thead>
-            <tbody>
-                @foreach (var siparis in Model)
-                {
-                    <tr>
-                        <td class="align-middle">@siparis.SiparisId</td>
-                        <td class="align-middle">
-                            <ul>
-                                @foreach (var film in siparis.SiparisFilmler)
-                                {
-                                    <li>
-                                        <div>
-                                           @((film.Fiyat*film.Adet).ToString("c")) - @film.Film.FilmAdi (@film.Adet Bilet)
-                                        </div>
+            }
+        </tbody>
 
-                                    </li>
-
-                                }
-
-                            </ul>
-                        </td>
-                        <td class="align-middle">
-                            @siparis.SiparisFilmler.Select(m => m.Film.FilmUcreti * m.Adet).Sum().ToString("c")
-                        </td>
-                         @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
-                    {<td class="align-middle">@siparis.Kullanici.UserName</td> }
-                        
-                    </tr>
-                }
-            </tbody>
-
-        </table>
+    </table>
 
 
 </div>
 
 <div class="text-center">
-    <a class="btn btn-dark" asp-controller="Film" asp-action="Index">Ana Sayfaya Dön</a>
+    <a class="btn btn-dark" asp-controller="Film" asp-action="Index">@localizer["anasayfa"]</a>
 </div>
 

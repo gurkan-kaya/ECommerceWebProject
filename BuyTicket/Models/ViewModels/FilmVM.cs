@@ -38,11 +38,13 @@ namespace BuyTicket.Models
 
         [Display(Name = "Film Oyuncuları")]
         /*Film modelimizde alttaki collection FilmOyuncu tipinde idi. Ancak many to many ilişkide ara tabloyla ilgili işlemleri yapabilmek için
-         * bu listenin tipini int olarak değiştirdim ve View'de dseçilen ıyunvuların ID'lerinin tutulmasını sağladım.
+         * bu listenin tipini int olarak değiştirdim ve View'de dseçilen oyuncuların ID'lerinin tutulmasını sağladım.
          */
         public ICollection<int> OyuncuListesi { get; set; }
 
+        [Display(Name = "Sinema Adı")]
         public int SinemaId { get; set; }
+        [Display(Name = "Yönetmen Adı")]
         public int YonetmenId { get; set; }
 
     }

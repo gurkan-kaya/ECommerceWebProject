@@ -8,12 +8,16 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Localization;
+using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Options;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -58,8 +62,25 @@ namespace BuyTicket
                 ).AddEntityFrameworkStores<BiletDbContext>();
             services.AddMemoryCache();
             services.AddSession();
-            services.AddAuthentication(); 
+            services.AddAuthentication();
 
+            //Coklu dil destegi icin
+            services.AddLocalization(opt => { opt.ResourcesPath = "Resources";});
+            services.AddMvc()
+                .AddViewLocalization(LanguageViewLocationExpanderFormat.Suffix)
+                .AddDataAnnotationsLocalization();
+            services.Configure<RequestLocalizationOptions>(
+                opt =>
+                {
+                    var cultures = new List<CultureInfo>
+                    {
+                        new CultureInfo("tr"),
+                        new CultureInfo("en")
+                    };
+                    opt.DefaultRequestCulture = new RequestCulture("tr");
+                    opt.SupportedCultures = cultures;
+                    opt.SupportedUICultures = cultures;
+                });
 
             services.AddControllersWithViews();
         }
@@ -85,6 +106,10 @@ namespace BuyTicket
             app.UseAuthentication();
 
             app.UseAuthorization();
+
+            //coklu dil destegi icin
+            app.UseRequestLocalization(app.ApplicationServices.GetRequiredService<IOptions<RequestLocalizationOptions>>().Value);
+
 
             app.UseEndpoints(endpoints =>
             {

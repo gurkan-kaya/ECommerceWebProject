@@ -1,5 +1,5 @@
 ﻿@inject Microsoft.AspNetCore.Identity.UserManager<Kullanici> kullanici
-
+@inject Microsoft.AspNetCore.Mvc.Localization.IViewLocalizer localizer
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,7 +12,9 @@
 <body style="background: linear-gradient(45deg, gray, #C0C0C0);">
     <header>
         <nav class="navbar navbar-expand-lg navbar-dark border-bottom box-shadow mb-3" style="background: linear-gradient(45deg, #C0C0C0, gray); ">
+            <div class="float-left"><partial name="_Culture" /></div>
             <div class="container">
+
                 <a class="navbar-brand" asp-controller="Film" asp-action="Index">
                     <img src="~/images/Logo.png">
                 </a>
@@ -22,10 +24,10 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <form class="form-inline" asp-controller="Film" asp-action="AramaSonucu">
-                    <input type="search" name="arananFilm" class="form-control rounded " placeholder="Film Ara" aria-label="Search"
+                    <input type="search" name="arananFilm" class="form-control rounded " placeholder="@localizer["FilmAra"]" aria-label="Search"
                            aria-describedby="search-addon" />
 
-                    <button type="submit" class="btn btn-light" style="margin-left:3px;">ARA</button>
+                    <button type="submit" class="btn btn-light" style="margin-left:3px;">@localizer["ARA"]</button>
                 </form>
                 <div class="navbar-collapse collapse d-md-inline-flex justify-content-between">
 
@@ -35,13 +37,13 @@
                         {
                             <li class="nav-item dropdown">
                                 <button class="btn btn-outline-light dropdown-toggle text-dark" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    Admin Menü
+                                    Admin Menu
                                 </button>
                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                    <a class="dropdown-item" asp-controller="Oyuncu" asp-action="Index">Oyuncular</a>
-                                    <a class="dropdown-item" asp-controller="Yonetmen" asp-action="Index">Yönetmenler</a>
-                                    <a class="dropdown-item" asp-controller="Sinema" asp-action="Index">Sinemalar</a>
-                                    <a class="dropdown-item" asp-controller="Film" asp-action="Create">Film Ekle</a>
+                                    <a class="dropdown-item" asp-controller="Oyuncu" asp-action="Index">@localizer["Oyuncular"]</a>
+                                    <a class="dropdown-item" asp-controller="Yonetmen" asp-action="Index">@localizer["Yönetmenler"]</a>
+                                    <a class="dropdown-item" asp-controller="Sinema" asp-action="Index">@localizer["Sinemalar"]</a>
+                                    <a class="dropdown-item" asp-controller="Film" asp-action="Create">@localizer["FilmEkle"]</a>
                                 </div>
 
                             </li>
@@ -52,25 +54,25 @@
 
                         @if (User.Identity.IsAuthenticated)
                         {
-                            <li class="nav-item rounded" style="margin-left: 20px; ">
-                                <a class="nav-link text-light" asp-area="" asp-controller="Siparis" asp-action="Index">
-                                    Sepet
-                                    <img src="~/images/shopping-cart.png" style="width: 30px; height: 30px; display: inline-block;" />
-                                </a>
-
-                            </li>
                             <li class="nav-item rounded dropdown" style="margin-left: 20px;">
-                                <button class="btn btn-outline-light dropdown-toggle text-dark" type="button" id="kullanici" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    Hoşgeldiniz, @kullanici.GetUserName(User)
+                                <button class="btn btn-outline-light dropdown-toggle text-dark mr-5" type="button" id="kullanici" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    @localizer["hosgeldiniz"] @kullanici.GetUserName(User)
                                 </button>
                                 <div class="dropdown-menu" aria-labelledby="kullanici">
                                     @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
-                                    {<a class="dropdown-item text-center" asp-controller="Account" asp-action="TumKullanicilar">Kayıtlı Kullanıcılar</a>}
-                                        <a class="dropdown-item text-center" asp-controller="Siparis" asp-action="TumSiparisler">Siparişler</a>
-                                        <form asp-controller="Account" asp-action="Cikis">
-                                            <button class="dropdown-item" style="background:none;border:none; text-align:center;">Çıkış Yap</button>
-                                        </form>
-                                    </div>
+                                    {<a class="dropdown-item text-center" asp-controller="Account" asp-action="TumKullanicilar">@localizer["kullanicilar"]</a>}
+                                    <a class="dropdown-item text-center" asp-controller="Siparis" asp-action="TumSiparisler">@localizer["siparis"]</a>
+                                    <form asp-controller="Account" asp-action="Cikis">
+                                        <button class="dropdown-item" style="background:none;border:none; text-align:center;">@localizer["cikis"]</button>
+                                    </form>
+                                </div>
+                            </li>
+
+                            <li class="nav-item rounded" style="margin-left: 20px; ">
+                                <a class="nav-link text-light" asp-area="" asp-controller="Siparis" asp-action="Index">
+                                    @localizer["sepet"]
+                                    <img src="~/images/shopping-cart.png" style="width: 30px; height: 30px; display: inline-block;" />
+                                </a>
                             </li>
                         }
 
@@ -78,13 +80,13 @@
                         {
                             <li class="nav-item rounded" style=" margin-left: 20px; ">
                                 <a class="nav-link text-light" asp-area="" asp-controller="Account" asp-action="Uyelik">
-                                    Üye Ol
+                                    @localizer["uyeol"]
                                     <img src="~/images/sign-up.png" style="width: 30px; height: 30px; display: inline-block;" />
                                 </a>
                             </li>
                             <li class="nav-item rounded" style="margin-left: 20px; ">
                                 <a class="nav-link text-light" asp-area="" asp-controller="Account" asp-action="Login">
-                                    Giriş Yap
+                                    @localizer["girisyap"]
                                     <img src="~/images/login.png" style="width: 30px; height: 30px; display: inline-block;" />
                                 </a>
                             </li>
@@ -116,7 +118,7 @@
         <div class="container-fluid text-center text-md-left text-light" style="white-space: normal;">
             <div class="row">
                 <div class="col-md-5 mt-md-0 mt-3">
-                    <h5 class="text-uppercase font-weight-bold">BİZİ TAKİP EDİN</h5>
+                    <h5 class="text-uppercase font-weight-bold">@localizer["takip"]</h5>
                     <p>INSTAGRAM</p>
                     <p>FACEBOOK</p>
                     <p>YOUTUBE</p>
@@ -124,17 +126,17 @@
 
                 <div class="col-md-4 mb-md-0 mb-3 ">
 
-                    <h5 class="font-weight-bold ">KATEGORİLER</h5>
+                    <h5 class="font-weight-bold ">@localizer["kategori"]</h5>
 
                     <ul class="list-unstyled ">
                         <li>
-                            <a class="text-light" href="#!">Komedi Filmleri</a>
+                            <a class="text-light" href="#!">@localizer["komedi"]</a>
                         </li>
                         <li>
-                            <a class="text-light" href="#!">Dram Filmleri</a>
+                            <a class="text-light" href="#!">@localizer["dram"]</a>
                         </li>
                         <li>
-                            <a class="text-light" href="#!">Aksiyon Filmleri</a>
+                            <a class="text-light" href="#!">@localizer["aksiyon"]</a>
                         </li>
                     </ul>
 
@@ -142,17 +144,17 @@
 
                 <div class="col-md-3 mb-md-0 mb-3">
 
-                    <h5 class=" font-weight-bold">ÖNEMLİ BİLGİLER</h5>
+                    <h5 class=" font-weight-bold">@localizer["onemli"]</h5>
 
                     <ul class="list-unstyled">
                         <li>
-                            <a class="text-light" href="#!">Hakkımızda</a>
+                            <a class="text-light" href="#!">@localizer["Hakkimizda"]</a>
                         </li>
                         <li>
-                            <a class="text-light" href="#!">İletişim</a>
+                            <a class="text-light" href="#!">@localizer["iletisim"]</a>
                         </li>
                         <li>
-                            <a class="text-light" href="#!">Sık Sorulan Sorular</a>
+                            <a class="text-light" href="#!">@localizer["sıksorulan"]</a>
                         </li>
                     </ul>
 

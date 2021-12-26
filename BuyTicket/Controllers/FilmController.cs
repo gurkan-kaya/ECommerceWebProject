@@ -3,6 +3,7 @@ using BuyTicket.Data.Repositories.Abstract;
 using BuyTicket.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -185,9 +186,14 @@ namespace BuyTicket.Controllers
             return View("Index", sonuc);
         }
 
+        [AllowAnonymous]
+        [HttpPost]
+        public IActionResult MultiLang(string culture,string url)
+        {
+            Response.Cookies.Append(CookieRequestCultureProvider.DefaultCookieName, CookieRequestCultureProvider.MakeCookieValue(new RequestCulture(culture)),
+                new CookieOptions { Expires = DateTimeOffset.Now.AddDays(30) });
+            return LocalRedirect(url);
+        }
+
     }
-
-
-
-
 }

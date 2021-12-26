@@ -3,9 +3,9 @@
 @{
     ViewData["Title"] = "Tüm Üyeler";
 }
+@inject Microsoft.AspNetCore.Mvc.Localization.IViewLocalizer localizer
 
-
-<h1>Tüm Üyeler</h1>
+<h1>@localizer["tumuyeler"]</h1>
 
 
 <table class="table">

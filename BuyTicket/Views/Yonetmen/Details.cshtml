@@ -1,36 +1,36 @@
 ﻿@model BuyTicket.Models.Yonetmen
-
+@inject Microsoft.AspNetCore.Mvc.Localization.IViewLocalizer localizer
 @{
     ViewData["Title"] = "Yönetmen Hakkında";
 }
 
-<h1>Yönetmen Bilgileri</h1>
+<h1>@localizer["yonetmenbilgileri"]</h1>
 
 <div>
     <hr />
     <dl class="row">
-        <dt class = "col-sm-2 align-self-center">
+        <dt class="col-sm-2 align-self-center">
             @Html.DisplayNameFor(model => model.YonetmenFotografi)
         </dt>
         <dd class="col-sm-10 pb-5">
             <img class="w-50 h-100" src="@Model.YonetmenFotografi" asp-append-version="true">
         </dd>
-        <dt class = "col-sm-2 pb-5 align-self-center">
+        <dt class="col-sm-2 pb-5 align-self-center">
             @Html.DisplayNameFor(model => model.YonetmenAdSoyad)
         </dt>
-        <dd class = "col-sm-10 pb-5">
+        <dd class="col-sm-10 pb-5">
             @Html.DisplayFor(model => model.YonetmenAdSoyad)
         </dd>
-        <dt class = "col-sm-2 align-self-center">
+        <dt class="col-sm-2 align-self-center">
             @Html.DisplayNameFor(model => model.YonetmenHakkinda)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.YonetmenHakkinda)
         </dd>
     </dl>
 </div>
 <div>
     @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
-    {<a class="btn btn-outline-light text-dark" asp-action="Edit" asp-route-id="@Model.YonetmenId">Düzenle</a> }
-    <a class="btn btn-secondary ml-3" asp-action="Index">Geri Dön</a>
+    {<a class="btn btn-outline-light text-dark" asp-action="Edit" asp-route-id="@Model.YonetmenId">@localizer["Düzenle"]</a>}
+<a class="btn btn-secondary ml-3" asp-action="Index">@localizer["geridon"]</a>
 </div>

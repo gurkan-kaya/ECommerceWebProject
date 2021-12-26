@@ -1,12 +1,12 @@
 ﻿@model BuyTicket.Models.Film
-
+@inject Microsoft.AspNetCore.Mvc.Localization.IViewLocalizer localizer
 @{
     ViewData["Title"] = "Details";
 }
 
 
 <div>
-    <h4>Film Bilgileri</h4>
+    <h4>@localizer["Film Bilgileri"]</h4>
     <hr />
     <dl class="row">
         <dt class="col-sm-2 pb-5 align-self-center">
@@ -68,23 +68,23 @@
             @Html.DisplayNameFor(model => model.FilmlerOyuncular)
         </dt>
         <dd class="row col-sm-10">
-            @foreach(var item in Model.FilmlerOyuncular)
+            @foreach (var item in Model.FilmlerOyuncular)
             {
-            <div class="column mr-5">
-                <img style="width:100px; height:150px;" src="@item.Oyuncu.OyuncuFotografi" asp-append-version="true">
-                <br />
-                <a asp-controller="Oyuncu" asp-action="Details" asp-route-id="@item.Oyuncu.OyuncuId">
-                    @item.Oyuncu.OyuncuAdSoyad
-                </a>
-            </div>
+                <div class="column mr-5">
+                    <img style="width:100px; height:150px;" src="@item.Oyuncu.OyuncuFotografi" asp-append-version="true">
+                    <br />
+                    <a asp-controller="Oyuncu" asp-action="Details" asp-route-id="@item.Oyuncu.OyuncuId">
+                        @item.Oyuncu.OyuncuAdSoyad
+                    </a>
+                </div>
             }
-            
+
         </dd>
     </dl>
 </div>
 <div>
     <a asp-controller="Siparis" asp-action="SepeteEkleArtir" asp-route-id="@Model.FilmId" class="btn btn-dark text-white">
-        Bilet Al  @Model.FilmUcreti TL
+        @localizer["biletal"]  @Model.FilmUcreti TL
     </a>
-    <a class="btn btn-secondary ml-3" asp-action="Index">Geri Dön</a>
+    <a class="btn btn-secondary ml-3" asp-action="Index">@localizer["geridon"]</a>
 </div>

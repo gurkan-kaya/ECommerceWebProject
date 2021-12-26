@@ -1,16 +1,17 @@
 ﻿@model IEnumerable<BuyTicket.Models.Oyuncu>
+@inject Microsoft.AspNetCore.Mvc.Localization.IViewLocalizer localizer
 
 @{
     ViewData["Title"] = "Oyuncular";
 }
 
 
-<h1>OYUNCULAR</h1>
+<h1>@localizer["OYUNCULAR"]</h1>
 
 @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
-{ <p>
-        <a asp-action="Create" class="btn btn-outline-dark">Yeni Oyuncu Ekle</a>
-  </p>
+{<p>
+     <a asp-action="Create" class="btn btn-outline-dark">@localizer["oyuncuekle"]</a>
+    </p>
 }
 
 <table class="table">
@@ -44,13 +45,13 @@
                 </td>
                 <td>
                     @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
-                     {
-                        <a asp-action="Edit" asp-route-id="@item.OyuncuId" class="btn btn-secondary btn-block">Düzenle</a>
+                    {
+                    <a asp-action="Edit" asp-route-id="@item.OyuncuId" class="btn btn-secondary btn-block">@localizer["duzenle"]</a>
                         <br />
-                        <a asp-action="Details" asp-route-id="@item.OyuncuId" class="btn btn-info btn-block">Detaylar</a>
+                        <a asp-action="Details" asp-route-id="@item.OyuncuId" class="btn btn-info btn-block">@localizer["detaylar"]</a>
                         <br />
-                        <a asp-action="Delete" asp-route-id="@item.OyuncuId" class="btn btn-dark btn-block">Sil</a>
-                     }
+                        <a asp-action="Delete" asp-route-id="@item.OyuncuId" class="btn btn-dark btn-block">@localizer["sil"]</a>
+                    }
 
                 </td>
             </tr>

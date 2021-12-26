@@ -1,10 +1,11 @@
 ﻿@model BuyTicket.Models.FilmVM
 @using BuyTicket.Data
+@inject Microsoft.AspNetCore.Mvc.Localization.IViewLocalizer localizer
 @{
     ViewData["Title"] = "Film Bilgilerini Düzenle";
 }
 
-<h2>Film Bilgilerini Düzenle</h2>
+<h2>@localizer["Film Bilgilerini Düzenle"]</h2>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -39,7 +40,7 @@
                 </div>
             </div>
             <div class="form-group">
-                <label asp-for="FilmFotografi" class="control-label">Yeni Fotoğraf</label>
+                <label asp-for="FilmFotografi" class="control-label">@localizer["yenifoto"]</label>
                 <input asp-for="FilmFotografi" type="file" name="file" class="form-control  mb-2" />
                 <input style="display:none;" asp-for="FilmFotografi" class="form-control mb-2" />
                 <span asp-validation-for="FilmFotografi" class="text-danger"></span>
@@ -70,8 +71,8 @@
             </div>
 
             <div class="form-group">
-                <input type="submit" value="Kaydet" class="btn btn-primary" />
-                <a class="btn btn-secondary float-right" asp-action="Index">Geri Dön</a>
+                <input type="submit" value="@localizer["kaydet"]" class="btn btn-primary" />
+                <a class="btn btn-secondary float-right" asp-action="Index">@localizer["geridon"]</a>
             </div>
         </form>
     </div>

@@ -1,21 +1,22 @@
 ﻿@model BuyTicket.Models.ViewModels.GirisVM
 
-@{ 
+@{
     ViewData["Title"] = "Giriş Yap";
 }
-
+@inject Microsoft.AspNetCore.Mvc.Localization.IViewLocalizer localizer
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
 </head>
 <body>
     <div class="container col-md-8 offset-2">
-        <h2 class="text-center">Giriş Yap</h2>
+        <h2 class="text-center">@localizer["girisyap"]</h2>
 
-        @if (ViewBag.error != null) { 
-        <div class="alert alert-danger">
-            @ViewBag.error
-        </div>
+        @if (ViewBag.error != null)
+        {
+            <div class="alert alert-danger">
+                @ViewBag.error
+            </div>
         }
 
         <form asp-action="Login" method="post">
@@ -31,8 +32,8 @@
                 <span asp-validation-for="Sifre"></span>
             </div>
             <div class="form-group text-center">
-                <input type="submit" class="btn btn-primary" name="name" value="Giriş Yap" />
-                <a class="btn btn-secondary ml-3" asp-controller="Film" asp-action="Index">Geri Dön</a>
+                <input type="submit" class="btn btn-primary" name="name" value="@localizer["girisyap"]" />
+                <a class="btn btn-secondary ml-3" asp-controller="Film" asp-action="Index">@localizer["geri"]</a>
             </div>
 
         </form>

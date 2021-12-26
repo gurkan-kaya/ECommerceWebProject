@@ -1,12 +1,10 @@
 ﻿@model BuyTicket.Models.Film
-
+@inject Microsoft.AspNetCore.Mvc.Localization.IViewLocalizer localizer
 @{
     ViewData["Title"] = "Delete";
 }
 
-<h1>Delete</h1>
-
-<h3>Are you sure you want to delete this?</h3>
+<h3>@localizer["Are you sure you want to delete this?"]</h3>
 <div>
     <h4>Film</h4>
     <hr />
@@ -86,7 +84,7 @@
 
     <form asp-action="Delete">
         <input type="hidden" asp-for="FilmId" />
-        <input type="submit" value="Sil" class="btn btn-danger" />
-        <a class="btn btn-secondary float-right" asp-action="Index">Geri Dön</a>
+        <input type="submit" value="@localizer["sil"]" class="btn btn-danger" />
+        <a class="btn btn-secondary float-right" asp-action="Index">@localizer["geridon"]</a>
     </form>
 </div>

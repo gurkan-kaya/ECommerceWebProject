@@ -1,10 +1,10 @@
 ﻿@model BuyTicket.Models.Sinema
-
+@inject Microsoft.AspNetCore.Mvc.Localization.IViewLocalizer localizer
 @{
     ViewData["Title"] = "Edit";
 }
 
-<h1>Sinema Bilgilerini Düzenle</h1>
+<h1>@localizer["SinemaBilgileriniDüzenle"]</h1>
 
 <hr />
 <div class="row">
@@ -13,7 +13,7 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="SinemaId" />
             <div class="form-group">
-                <label asp-for="SinemaFotografi" class="control-label">Yeni Fotoğraf</label>
+                <label asp-for="SinemaFotografi" class="control-label">@localizer["yenifoto"]</label>
                 <input asp-for="SinemaFotografi" type="file" name="file" class="form-control mb-2" />
                 <input style="display:none;" asp-for="SinemaFotografi" class="form-control mb-2" />
                 <span asp-validation-for="SinemaFotografi" class="text-danger"></span>
@@ -30,8 +30,8 @@
             </div>
             <div class="form-group">
                 <div class="form-group">
-                    <input type="submit" value="Kaydet" class="btn btn-primary" />
-                    <a class="btn btn-secondary float-right" asp-action="Index">Geri Dön</a>
+                    <input type="submit" value="@localizer["kaydet"]" class="btn btn-primary" />
+                    <a class="btn btn-secondary float-right" asp-action="Index">@localizer["geridon"]</a>
                 </div>
             </div>
         </form>

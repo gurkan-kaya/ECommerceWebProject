@@ -38,11 +38,12 @@ namespace BuyTicket.Models
 
         public int SinemaId { get; set; }
         [ForeignKey("SinemaId")]
+        [Display(Name = "Sinema Adı")]
         public Sinema Sinema { get; set; }
 
         public int YonetmenId { get; set; }
 
-        [Display(Name = "Yönetmen")]
+        [Display(Name = "Yönetmen Adı")]
         [ForeignKey("YonetmenId")]
         public Yonetmen Yonetmen { get; set; }
     }

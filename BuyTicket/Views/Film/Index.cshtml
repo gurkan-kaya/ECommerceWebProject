@@ -1,5 +1,5 @@
 ﻿@model IEnumerable<BuyTicket.Models.Film>
-
+@inject Microsoft.AspNetCore.Mvc.Localization.IViewLocalizer localizer
 @{
     ViewData["Title"] = "Filmler";
 }
@@ -11,25 +11,26 @@
             <div class="card mb-3">
                 <div class="row ">
                     <div class="col-md-12">
+
                         <div class="card-header text-white bg-dark">
                             <p class="card-text">
                                 <h3 class="card-title text-center">
                                     @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
-                                    {<a class=" btn btn-outline-secondary text-white float-left" style="font-size:large" asp-action="Edit" asp-route-id="@item.FilmId">Düzenle</a>}
+                                    {<a class=" btn btn-outline-secondary text-white float-left" style="font-size:large" asp-action="Edit" asp-route-id="@item.FilmId">@localizer["duzenle"]</a>}
                                     @item.FilmAdi
                                     @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
-                                    {<a class="btn btn-outline-secondary text-white float-right" style="font-size:large" asp-action="Delete" asp-route-id="@item.FilmId">Sil</a>}
+                                    {<a class="btn btn-outline-secondary text-white float-right" style="font-size:large" asp-action="Delete" asp-route-id="@item.FilmId">@localizer["sil"]</a>}
                                 </h3>
                             </p>
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="card-body">
-                            <p class="card-text rounded" style="background-color: whitesmoke;">@item.FilmHakkinda.Substring(0, 100) ...</p>
-                            <p class="card-text rounded" style="background-color:whitesmoke;"><b>Kategori: </b>@item.FilmKategorisi</p>
-                            <p class="card-text rounded" style="background-color: whitesmoke;"><b>Sinema: </b>@item.Sinema.SinemaAdi</p>
+                            <p class="card-text rounded" style="background-color: whitesmoke;"><b>@localizer["FilmHakkinda"]: </b>@item.FilmHakkinda.Substring(0, 100) ...</p>
+                            <p class="card-text rounded" style="background-color:whitesmoke;"><b>@localizer["Kategori"]: </b>@item.FilmKategorisi</p>
+                            <p class="card-text rounded" style="background-color: whitesmoke;"><b>@localizer["Sinema"]: </b>@item.Sinema.SinemaAdi</p>
                             <p class="card-text rounded" style="background-color:whitesmoke;">
-                                <b>Seans Seçiniz: </b>
+                                <b>@localizer["SeansSeciniz"]: </b>
                                 <select name="saat" id="saat" style="height: 44px; border: none; overflow: hidden; background-color: whitesmoke;">
                                     <option class="btn btn-outline-info mb-1 card-text" value="bir">@item.FilmBaslamaSaati1</option>
                                     <option class="btn btn-outline-info mb-1 card-text" value="iki">@item.FilmBaslamaSaati2</option>
@@ -45,10 +46,10 @@
                         <div class="card-footer">
                             <p class="card-text">
                                 <a class="btn btn-outline-secondary float-right" asp-action="Details" asp-route-id="@item.FilmId">
-                                    Daha Fazla
+                                    @localizer["DahaFazla"]
                                 </a>
                                 <a asp-controller="Siparis" asp-action="SepeteEkleArtir" asp-route-id="@item.FilmId" class="btn btn-dark text-white">
-                                    Bilet Al  @item.FilmUcreti TL
+                                    @localizer["BiletAl"] @item.FilmUcreti TL
                                 </a>
                             </p>
                         </div>

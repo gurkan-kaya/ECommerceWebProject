@@ -1,0 +1,18 @@
+﻿@inject Microsoft.AspNetCore.Mvc.Localization.IViewLocalizer localizer
+@inject Microsoft.Extensions.Options.IOptions<Microsoft.AspNetCore.Builder.RequestLocalizationOptions> locOptions
+
+
+@{ 
+    var Culture = Context.Features.Get<Microsoft.AspNetCore.Localization.IRequestCultureFeature>();
+    //dropdownda listeleme yapmak icin
+    var DilListe = locOptions.Value.SupportedUICultures.Select(m => new SelectListItem { Value = m.Name, Text = m.Name }).ToList();
+    var url = string.IsNullOrWhiteSpace(Context.Request.Path) ? "~/" : $"~{Context.Request.Path.Value}{Context.Request.QueryString}";
+}
+
+<div>
+    <form asp-action="MultiLang" asp-controller="Film" method="post" asp-route-url="@url">
+        <select class="nav-item rounded" name="culture" asp-for="@Culture.RequestCulture.UICulture.Name" asp-items="DilListe" onchange="this.form.submit();">
+
+        </select>
+    </form>
+</div>

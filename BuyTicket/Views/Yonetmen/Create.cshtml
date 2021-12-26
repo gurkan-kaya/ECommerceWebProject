@@ -1,10 +1,10 @@
 ﻿@model BuyTicket.Models.Yonetmen
-
+@inject Microsoft.AspNetCore.Mvc.Localization.IViewLocalizer localizer
 @{
     ViewData["Title"] = "Yönetmen Ekle";
 }
 
-<h2>Yönetmen Ekle</h2>
+<h2>@localizer["yonetmenekle"]</h2>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -21,13 +21,13 @@
                 <span asp-validation-for="YonetmenAdSoyad" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="YonetmenHakkinda"  class="control-label"></label>
+                <label asp-for="YonetmenHakkinda" class="control-label"></label>
                 <textarea asp-for="YonetmenHakkinda" rows="5" class="form-control"></textarea>
                 <span asp-validation-for="YonetmenHakkinda" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-outline-light text-dark" />
-                <a class="btn btn-secondary float-right" asp-action="Index">Geri Dön</a>
+                <input type="submit" value="@localizer["ekle"]" class="btn btn-outline-light text-dark" />
+                <a class="btn btn-secondary float-right" asp-action="Index">@localizer["geridon"]</a>
             </div>
         </form>
     </div>
